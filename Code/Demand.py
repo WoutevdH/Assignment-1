@@ -28,10 +28,6 @@ class Demand:
                 if i != 0 and j != 0:
                     self.demand_dict[key] = airportdata.iloc[i, j]
 
-    # def __init__(self, year: int, matrix):
-    #     self.year = year
-    #     self.demand_dict = matrix
-
     def get_demand(self, city1: str, city2: str) -> int:
         key: str = city1 + ":" + city2
         return self.demand_dict[key]

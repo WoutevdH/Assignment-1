@@ -1,6 +1,6 @@
 import Airport_manager
-import Airport
 import Demand_manager
+import Population_manager
 
 def main():
     airport_manager = Airport_manager.AirportManager(
@@ -9,6 +9,13 @@ def main():
     demand_manager = Demand_manager.DemandManager(
         "Problem 1 - Data/Problem 1 - Data/DemandGroup2.xlsx"
     )
+
+    population_data = Population_manager.Population_manager(
+        "Problem 1 - Data/Problem 1 - Data/Pop.xlsx"
+    )
+
+    barcelona_population = population_data.get_population_data("Barcelona")
+    print(f"Barcelona population in 2024: {barcelona_population.pop2024}")
 
     london_airport = airport_manager.get_airport("London")
     print(london_airport)
