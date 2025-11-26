@@ -2,7 +2,6 @@ import Airport_manager
 import Demand_manager
 import Population_manager
 
-
 def main():
     airport_manager = Airport_manager.AirportManager(
         "Problem 1 - Data/Problem 1 - Data/DemandGroup2.xlsx"
