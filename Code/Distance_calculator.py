@@ -2,7 +2,8 @@
 
 import numpy as np
 import pandas as pd
-from gurobipy import Model, GRB, Var, quicksum
+
+# from gurobipy import Model, GRB, Var, quicksum
 
 
 def calculate_distance(
