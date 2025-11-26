@@ -1,7 +1,7 @@
 import pandas as pd
 
 popdata = pd.read_excel(
-    r"C:\Users\Martijn\Delft\TIL master\AE4423\Opdracht 1\Problem 1 - Data\Problem 1 - Data\Pop.xlsx",
+    "Code//Problem 1 - Data//Problem 1 - Data//pop.xlsx",
     skiprows=[1,2],
     usecols="A:C, E:G",
 )
