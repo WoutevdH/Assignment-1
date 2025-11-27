@@ -11,7 +11,6 @@ class Demand:
     def __init__(self, year: int, airportdata: str):
         self.year = year
         filename = self.BASE_DIR / airportdata
-        print(filename)
         airportdata = pd.read_excel(
             filename,
             skiprows=range(11),

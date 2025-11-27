@@ -11,7 +11,6 @@ class AirportManager:
 
     def __init__(self, airportdata: str):
         filename = self.BASE_DIR / airportdata
-        print(filename)
         airportdata = pd.read_excel(
             filename,
             skiprows=[0, 1, 2],

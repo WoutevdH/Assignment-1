@@ -10,6 +10,9 @@ class Population_data:
         self.gdp2021: float = gdp2021
         self.gdp2024: float = gdp2024
 
+    def __repr__(self):
+        return f"Population_data(city={self.city}, pop2021={self.pop2021}, pop2024={self.pop2024}, gdp2021={self.gdp2021}, gdp2024={self.gdp2024})"
+
 
 class Population_manager:
     BASE_DIR = Path(__file__).resolve().parent
@@ -20,9 +23,6 @@ class Population_manager:
         self.filename: str = filename_input
 
         filename = self.BASE_DIR / filename_input
-
-        print(filename)
-
         popdata = pd.read_excel(
             filename, skiprows=[0, 1], usecols="A:C, F:G", index_col=0
         )
