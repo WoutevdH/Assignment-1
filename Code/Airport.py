@@ -17,3 +17,6 @@ class Airport:
 
     def __repr__(self):
         return f"Airport(city={self.city}, code={self.code}, lat={self.lat}, lon={self.lon}, runway_length={self.runway_length}, available_slots={self.available_slots})"
+
+
+#create a list of airports
