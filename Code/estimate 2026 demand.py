@@ -91,9 +91,7 @@ demand_estimated_2021_dict = estimate_demand(
     cities, pop_2021_dict, gdp_2021_dict, airport_lat, airport_lon
 )
 
-print(
-    demand_estimated_2021_dict["Paris", "London"], demand_2021_dict["Paris", "London"]
-)
+print(demand_estimated_2021_dict, demand_2021_dict)
 
 demand_2026_dataframe = pd.DataFrame(0.0, index=cities, columns=cities)
 
