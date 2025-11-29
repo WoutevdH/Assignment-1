@@ -1,3 +1,6 @@
+##This file estimates the 2026 growth for gdp and population and then uses the gravity model to estimate 2026 demand
+
+
 from data_loader_new import *
 from Distance_calculator import calculate_distance
 import numpy as np
@@ -48,40 +51,48 @@ pop_2026_dict, gdp_2026_dict = pop_gdp_2026estimator(
 
 
 ## Estimate 2026 demand using the gravity model parameters obtained earlier
-def estimate_2026_demand(
+def estimate_demand(
     cities,
-    pop_2026_dict,
-    gdp_2026_dict,
+    pop_year_dict,
+    gdp_year_dict,
     airport_lat,
     airport_lon,
     f=1.42,
-    k=9.852502234391946e-15,
-    b1=0.6501425718816738,
-    b2=0.7229168055197981,
-    b3=0.340029485797922,
+    k=9.724183066185807e-07,
+    b1=0.5187262711183023,
+    b2=0.5347745906777904,
+    b3=1.0785119516638721,
 ):
-    demand_2026_dict = {}
+    demand_year_dict = {}
 
     for i in cities:
         for j in cities:
 
             if i == j:
-                demand_2026_dict[(i, j)] = 0
+                demand_year_dict[(i, j)] = 0
             elif i != j:
-                pop = pop_2026_dict[i] * pop_2026_dict[j]
-                gdp = gdp_2026_dict[i] * gdp_2026_dict[j]
+                pop = pop_year_dict[i] * pop_year_dict[j]
+                gdp = gdp_year_dict[i] * gdp_year_dict[j]
                 distance_ij = calculate_distance(
                     airport_lat[i], airport_lat[j], airport_lon[i], airport_lon[j]
                 )
 
                 demand_ij = k * (((pop**b1) * (gdp**b2)) / ((f * distance_ij) ** b3))
-                demand_2026_dict[(i, j)] = demand_ij
+                demand_year_dict[(i, j)] = demand_ij
 
-    return demand_2026_dict
+    return demand_year_dict
 
 
-demand_2026_dict = estimate_2026_demand(
+demand_2026_dict = estimate_demand(
     cities, pop_2026_dict, gdp_2026_dict, airport_lat, airport_lon
+)
+
+demand_estimated_2021_dict = estimate_demand(
+    cities, pop_2021_dict, gdp_2021_dict, airport_lat, airport_lon
+)
+
+print(
+    demand_estimated_2021_dict["Paris", "London"], demand_2021_dict["Paris", "London"]
 )
 
 demand_2026_dataframe = pd.DataFrame(0.0, index=cities, columns=cities)
@@ -91,5 +102,5 @@ for (i, j), demand in demand_2026_dict.items():
 
 demand_2026_dataframe.to_excel(BASE_DIR / "Estimated Data/demand_2026_matrix.xlsx")
 
-print(pop_2026_dict["Paris"], gdp_2026_dict["Paris"])
-print(demand_2026_dict["Paris", "London"])
+# print(pop_2026_dict["Paris"], gdp_2026_dict["Paris"])
+# print(demand_2026_dict["Paris", "London"])

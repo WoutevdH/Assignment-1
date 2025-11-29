@@ -1,3 +1,5 @@
+##This file estimates the parameters for the gravity model based on 2021 data
+
 import numpy as np
 import pandas as pd
 from data_loader_new import *
@@ -21,11 +23,13 @@ demand_2021_dict = demand2021_loader()
 pop_2021_dict, pop_2024_dict, gdp_2021_dict, gdp_2024_dict = population_data_loader()
 
 
-def estimate_gravity_model(popdata, gdpdata, airports_lat, airports_lon, f=1.42):
+def estimate_gravity_model(
+    popdata, gdpdata, demand_data, airports_lat, airports_lon, f=1.42
+):
 
     rows = []
 
-    for (i, j), D_ij in demand_2021_dict.items():
+    for (i, j), D_ij in demand_data.items():
         pop_i = popdata[i]
         pop_j = popdata[j]
 
@@ -36,12 +40,18 @@ def estimate_gravity_model(popdata, gdpdata, airports_lat, airports_lon, f=1.42)
             airports_lat[i], airports_lat[j], airports_lon[i], airports_lon[j]
         )
 
+        if i == j:
+            continue  # Skip same city pairs
+
+        if D_ij <= 0:
+            continue  # Skip zero demand pairs to avoid log(0)
+
         rows.append(
             {
-                "ln_D_ij": np.log(D_ij + 1),  # Adding 1 to avoid log(0)
+                "ln_D_ij": np.log(D_ij),  # Adding 1 to avoid log(0)
                 "ln_pop": np.log(pop_i * pop_j),
                 "ln_gdp": np.log(gdp_i * gdp_j),
-                "ln_fd": np.log(f * distance_ij + 1),  # Adding 1 to avoid log(0)
+                "ln_fd": np.log(f * distance_ij),  # Adding 1 to avoid log(0)
             }
         )
 
@@ -60,12 +70,12 @@ def estimate_gravity_model(popdata, gdpdata, airports_lat, airports_lon, f=1.42)
     # Target vector y
     y = gravity_df["ln_D_ij"].values
 
-    beta = np.linalg.inv(X.T @ X) @ X.T @ y
+    beta = np.linalg.lstsq(X, y, rcond=None)[0]
 
     k = np.exp(beta[0])
     b1 = beta[1]
     b2 = beta[2]
-    b3 = beta[3] * -1  # since we negated ln_fd in X
+    b3 = beta[3]
 
     print(f"Estimated parameters:")
     print(f"k = {k}")
@@ -76,4 +86,6 @@ def estimate_gravity_model(popdata, gdpdata, airports_lat, airports_lon, f=1.42)
     return k, b1, b2, b3
 
 
-estimate_gravity_model(pop2021_dict, gdp2021_dict, airport_lat, airport_lon)
+estimate_gravity_model(
+    pop2021_dict, gdp2021_dict, demand_2021_dict, airport_lat, airport_lon
+)
