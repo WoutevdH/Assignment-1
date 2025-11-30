@@ -48,10 +48,10 @@ def estimate_gravity_model(
 
         rows.append(
             {
-                "ln_D_ij": np.log(D_ij),  # Adding 1 to avoid log(0)
+                "ln_D_ij": np.log(D_ij),
                 "ln_pop": np.log(pop_i * pop_j),
                 "ln_gdp": np.log(gdp_i * gdp_j),
-                "ln_fd": np.log(f * distance_ij),  # Adding 1 to avoid log(0)
+                "ln_fd": np.log(f * distance_ij),
             }
         )
 
@@ -87,5 +87,5 @@ def estimate_gravity_model(
 
 
 estimate_gravity_model(
-    pop2021_dict, gdp2021_dict, demand_2021_dict, airport_lat, airport_lon
+    pop_2021_dict, gdp_2021_dict, demand_2021_dict, airport_lat, airport_lon
 )

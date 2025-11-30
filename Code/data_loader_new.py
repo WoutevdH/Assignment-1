@@ -83,18 +83,64 @@ def population_data_loader():
     return pop_2021_dict, pop_2024_dict, gdp_2021_dict, gdp_2024_dict
 
 
-(
-    cities,
-    airport_code,
-    airport_lat,
-    airport_lon,
-    airport_runway_length,
-    airport_available_slots,
-) = airportdata_loader()
+## Import aircraft data for different types of aircraft and return a dictionaries, index is number of aircraft
+def aircraft_data_loader():
+    filepath = BASE_DIR / "Problem 1 - Data/Problem 1 - Data/AircraftData.xlsx"
+    aircraft_data = pd.read_excel(filepath, skiprows=[1, 2, 8], index_col=0)
+    # print(aircraft_data.head())
+    aircraft_types = list(aircraft_data.columns)
+    # print(aircraft_types)
 
-demand_2021_dict = demand2021_loader()
+    ##Aircraft specs
+    speed_dict = aircraft_data.loc["Speed [km/h]"].to_dict()
+    seats_dict = aircraft_data.loc["Seats"].to_dict()
+    TAT_dict = aircraft_data.loc["Average TAT [mins]"].to_dict()
+    range_dict = aircraft_data.loc["Maximum range [km]"].to_dict()
+    runway_req_dict = aircraft_data.loc["Runway required [m]"].to_dict()
 
-pop2021_dict, pop2024_dict, gdp2021_dict, gdp2024_dict = population_data_loader()
+    ##Aircraft operating costs
+    weekly_lease_dict = aircraft_data.loc["Weekly lease cost [€]"].to_dict()
+    fixed_cost_dict = aircraft_data.loc["Fixed operating cost C_X [€]"].to_dict()
+    time_cost_param_dict = aircraft_data.loc["Time cost parameter C_T [€/hr]"].to_dict()
+    fuel_cost_param_dict = aircraft_data.loc["Fuel cost parameter C_F"].to_dict()
+
+    return (
+        speed_dict,
+        seats_dict,
+        TAT_dict,
+        range_dict,
+        runway_req_dict,
+        weekly_lease_dict,
+        fixed_cost_dict,
+        time_cost_param_dict,
+        fuel_cost_param_dict,
+    )
+
+
+# (
+#     speed_dict,
+#     seats_dict,
+#     TAT_dict,
+#     range_dict,
+#     runway_req_dict,
+#     weekly_lease_dict,
+#     fixed_cost_dict,
+#     time_cost_param_dict,
+#     fuel_cost_param_dict,
+# ) = aircraft_data_loader()
+
+# (
+#     cities,
+#     airport_code,
+#     airport_lat,
+#     airport_lon,
+#     airport_runway_length,
+#     airport_available_slots,
+# ) = airportdata_loader()
+
+# demand_2021_dict = demand2021_loader()
+
+# pop2021_dict, pop2024_dict, gdp2021_dict, gdp2024_dict = population_data_loader()
 
 # print(f"This is an example of all data for city Barcelona: ")
 # print(f"Airport code: {airport_code['Barcelona']}")

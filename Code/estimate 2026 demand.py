@@ -50,7 +50,7 @@ pop_2026_dict, gdp_2026_dict = pop_gdp_2026estimator(
 # print(pop_2026_dict, gdp_2026_dict)
 
 
-## Estimate 2026 demand using the gravity model parameters obtained earlier
+## Estimate demand using the gravity model parameters obtained earlier
 def estimate_demand(
     cities,
     pop_year_dict,
