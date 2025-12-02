@@ -1,7 +1,7 @@
 ##This file estimates the 2026 growth for gdp and population and then uses the gravity model to estimate 2026 demand
 
 
-from data_loader_new import *
+from data_loader import *
 from Distance_calculator import calculate_distance
 import numpy as np
 from pathlib import Path
@@ -78,7 +78,9 @@ def estimate_demand(
                 )
 
                 demand_ij = k * (((pop**b1) * (gdp**b2)) / ((f * distance_ij) ** b3))
-                demand_year_dict[(i, j)] = demand_ij
+                demand_year_dict[(i, j)] = int(
+                    demand_ij
+                )  ## Cannot transport fractions of passengers
 
     return demand_year_dict
 
@@ -87,11 +89,18 @@ demand_2026_dict = estimate_demand(
     cities, pop_2026_dict, gdp_2026_dict, airport_lat, airport_lon
 )
 
+##THIS IS TO SAVE THE DICT FILE SO IT DOES NOT HAVE TO BE RECALCULATED EVERY TIME
+import pickle
+
+with open(BASE_DIR / "Estimated Data/demand_2026_dict.pkl", "wb") as file:
+    pickle.dump(demand_2026_dict, file)
+
+
 demand_estimated_2021_dict = estimate_demand(
     cities, pop_2021_dict, gdp_2021_dict, airport_lat, airport_lon
 )
 
-print(demand_estimated_2021_dict, demand_2021_dict)
+# print(demand_estimated_2021_dict, demand_2021_dict)
 
 demand_2026_dataframe = pd.DataFrame(0.0, index=cities, columns=cities)
 

@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-from data_loader_new import *
+from data_loader import *
 from Distance_calculator import calculate_distance
 
 
