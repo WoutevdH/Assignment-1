@@ -87,9 +87,7 @@ def population_data_loader():
 def aircraft_data_loader():
     filepath = BASE_DIR / "Problem 1 - Data/Problem 1 - Data/AircraftData.xlsx"
     aircraft_data = pd.read_excel(filepath, skiprows=[1, 2, 8], index_col=0)
-    # print(aircraft_data.head())
     aircraft_types = list(aircraft_data.columns)
-    # print(aircraft_types)
 
     ##Aircraft specs
     speed_dict = aircraft_data.loc["Speed [km/h]"].to_dict()
@@ -105,6 +103,7 @@ def aircraft_data_loader():
     fuel_cost_param_dict = aircraft_data.loc["Fuel cost parameter C_F"].to_dict()
 
     return (
+        aircraft_types,
         speed_dict,
         seats_dict,
         TAT_dict,
