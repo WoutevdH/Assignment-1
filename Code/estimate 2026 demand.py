@@ -5,6 +5,7 @@ from data_loader import *
 from Distance_calculator import calculate_distance
 import numpy as np
 from pathlib import Path
+import matplotlib.pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -78,7 +79,7 @@ def estimate_demand(
                 )
 
                 demand_ij = k * (((pop**b1) * (gdp**b2)) / ((f * distance_ij) ** b3))
-                demand_year_dict[(i, j)] = int(
+                demand_year_dict[(i, j)] = round(
                     demand_ij
                 )  ## Cannot transport fractions of passengers
 
@@ -100,7 +101,6 @@ demand_estimated_2021_dict = estimate_demand(
     cities, pop_2021_dict, gdp_2021_dict, airport_lat, airport_lon
 )
 
-# print(demand_estimated_2021_dict, demand_2021_dict)
 
 demand_2026_dataframe = pd.DataFrame(0.0, index=cities, columns=cities)
 
@@ -109,5 +109,23 @@ for (i, j), demand in demand_2026_dict.items():
 
 demand_2026_dataframe.to_excel(BASE_DIR / "Estimated Data/demand_2026_matrix.xlsx")
 
-# print(pop_2026_dict["Paris"], gdp_2026_dict["Paris"])
-# print(demand_2026_dict["Paris", "London"])
+
+##Check how well the model estimates demand for 2021 compared to actual demand
+keys = list(demand_2021_dict.keys())
+
+real_demand_values_2021 = [int(demand_2021_dict[k]) for k in keys]
+estimated_demand_values_2021 = [int(demand_estimated_2021_dict[k]) for k in keys]
+
+plt.figure(figsize=(6, 6))
+plt.scatter(real_demand_values_2021, estimated_demand_values_2021)
+xline = np.linspace(0, 1100, 100)
+plt.plot(
+    xline, xline, linestyle="--", linewidth=1, color="red", label="Perfect estimate"
+)
+plt.xlabel("Real 2021 Demand")
+plt.xlim(0, 1100)
+plt.ylim(0, 1100)
+plt.ylabel("Estimated 2021 Demand")
+plt.legend()
+plt.savefig(BASE_DIR / "Estimated Data/demand_estimate_2021_vs_real.png", dpi=300)
+plt.show()

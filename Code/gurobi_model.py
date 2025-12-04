@@ -32,6 +32,7 @@ with open(BASE_DIR / "Estimated Data/yield_dict.pkl", "rb") as file:
 ## Importing aircraft data
 ## The index is "Aircraft 1", "Aircraft 2", ...
 (
+    aircraft_types,
     speed_dict,
     seats_dict,
     TAT_dict,
@@ -43,6 +44,157 @@ with open(BASE_DIR / "Estimated Data/yield_dict.pkl", "rb") as file:
     fuel_cost_param_dict,
 ) = aircraft_data_loader()
 
-print(demand_2026_dict["London", "Madrid"], airport_code["Madrid"])  # Example usage
-print(seats_dict["Aircraft 1"], speed_dict["Aircraft 1"])
-print(yield_dict["Berlin", "Barcelona"])
+f = 1.42  # fuel cost
+
+g = {city: (0 if city == "Paris" else 1) for city in cities}
+
+LF = 0.75  # load factor
+
+BT = 70  # operating hours per week per aircraft
+
+model = Model("network_fleet_development")
+
+## Decision variables
+
+# x_ij: direct  flow of passengers from airport i to airport j
+x = {}
+for i in cities:
+    for j in cities:
+        x[i, j] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"x_{i}_{j}")
+
+
+# z_ijk: number of flights from airport i to airport j using aircraft k
+z = {}
+for i in cities:
+    for j in cities:
+        for k in aircraft_types:
+            z[i, j, k] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"z_{i}_{j}_{k}")
+
+# w_ij: flow from airport i to airport j with transfer at the hub
+w = {}
+for i in cities:
+    for j in cities:
+        w[i, j] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"w_{i}_{j}")
+
+# AC_k: number of aircraft of type k to be leased
+AC = {}
+for k in aircraft_types:
+    AC[k] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"AC_{k}")
+
+
+# Objective: maximize profit
+objective = (
+    quicksum(
+        (distance_dict[i, j] * yield_dict[i, j]) * (x[i, j] + w[i, j])
+        for i in cities
+        for j in cities
+    )
+    - quicksum(
+        z[i, j, k]
+        * (
+            fixed_cost_dict[k]
+            + time_cost_param_dict[k] * (distance_dict[i, j] / speed_dict[k])
+            + ((fuel_cost_param_dict[k] * f * distance_dict[i, j]) / 1.5)
+        )
+        for k in aircraft_types
+        for i in cities
+        for j in cities
+    )
+    - quicksum(weekly_lease_dict[k] * AC[k] for k in aircraft_types)
+)
+
+
+model.setObjective(objective, GRB.MAXIMIZE)
+
+model.update()
+
+## Constraints
+# Constraint 1: Demand satisfaction
+for i in cities:
+    for j in cities:
+        model.addConstr(
+            x[i, j] + w[i, j] <= demand_2026_dict[i, j], name=f"demand_{i}_{j}"
+        )
+
+# Constraint 2: ensure w_ij is only nonzero if there is a transfer at the hub
+for i in cities:
+    for j in cities:
+        model.addConstr(
+            w[i, j] <= demand_2026_dict[i, j] * (g[i] * g[j]),
+            name=f"hub_transfer_{i}_{j}",
+        )
+
+# Constraint 3: All flights go via the hub
+for i in cities:
+    for j in cities:
+        for k in aircraft_types:
+            model.addConstr(z[i, j, k] * g[i] * g[j] == 0, name=f"via_hub_{i}_{j}_{k}")
+
+# Constraint 4: capacity check considering direct and transfer passengers
+for i in cities:
+    for j in cities:
+        model.addConstr(
+            x[i, j]
+            + quicksum(w[i, m] * (1 - g[j]) for m in cities if m != i and m != j)
+            + quicksum(w[m, j] * (1 - g[i]) for m in cities if m != i and m != j)
+            <= quicksum(z[i, j, k] * seats_dict[k] * LF for k in aircraft_types),
+            name=f"capacity_{i}_{j}",
+        )
+
+# Constraint 5: continuity constraint of aircrafts
+for i in cities:
+    for k in aircraft_types:
+        model.addConstr(
+            quicksum(z[i, j, k] for j in cities)
+            == quicksum(z[j, i, k] for j in cities),
+            name=f"aircraft_continuity_{i}_{k}",
+        )
+
+# Constraint 6: aircraft utilization constraint
+for k in aircraft_types:
+    model.addConstr(
+        quicksum(
+            ((distance_dict[i, j] / speed_dict[k]) + TAT_dict[k]) * z[i, j, k]
+            for i in cities
+            for j in cities
+        )
+        <= BT * AC[k],
+        name=f"aircraft_utilization_{k}",
+    )
+
+# Constraint 7: range constraint
+for i in cities:
+    for j in cities:
+        if i != j:
+            for k in aircraft_types:
+                if distance_dict[i, j] <= range_dict[k]:
+                    a = 7000  # big M
+                else:
+                    a = 0
+                model.addConstr(z[i, j, k] <= a, name=f"range_{i}_{j}_{k}")
+
+# Constraint 8: runway length constraint
+for i in cities:
+    for j in cities:
+        if i != j:
+            for k in aircraft_types:
+                if (
+                    runway_req_dict[k] <= airport_runway_length[i]
+                    and runway_req_dict[k] <= airport_runway_length[j]
+                ):
+                    b = 5000  # big M
+                else:
+                    b = 0
+                model.addConstr(z[i, j, k] <= b, name=f"runway_{i}_{j}_{k}")
+
+model.update()
+
+model.optimize()
+
+model.write("network_fleet_development.lp")
+
+if model.status == GRB.OPTIMAL:
+    print("Optimal objective value:", model.objVal)
+    for v in model.getVars():
+        if v.x > 0:
+            print(f"{v.varName}: {v.x}")
