@@ -3,6 +3,7 @@ import numpy as np
 from data_loader import *
 import pickle
 from gurobipy import Model, Var, GRB, quicksum
+import matplotlib.pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -17,6 +18,7 @@ with open(BASE_DIR / "Estimated Data/distance_dict.pkl", "rb") as file:
 ## This is importing all the yields calculated earlier
 with open(BASE_DIR / "Estimated Data/yield_dict.pkl", "rb") as file:
     yield_dict = pickle.load(file)
+
 
 ## Importing airport data
 ## The index is the city names
@@ -199,11 +201,9 @@ for i in cities:
 
 model.params.MIPGap = 0.002
 
-
 model.update()
 
 model.optimize()
-
 
 model.write("network_fleet_development.lp")
 
@@ -224,3 +224,47 @@ if model.status == GRB.OPTIMAL:
     # --- Sum of all z[i,j,k] ---
     sum_z = sum(v.x for v in model.getVars() if v.varName.startswith("z_"))
     print("Total number of flights (sum of z):", sum_z)
+
+    # --- Number of each aircraft type leased ---
+    print("\nNumber of each aircraft type leased:")
+    for k in aircraft_types:
+        leased_count = sum(v.x for v in model.getVars() if v.varName == f"AC_{k}")
+        print(f"{k}: {leased_count}")
+
+# --- Visualization of the operated flight network ---
+
+# --- Extract coordinates into a clean dictionary ---
+coords = {city: (airport_lon[city], airport_lat[city]) for city in cities}  # (lon, lat)
+
+# --- Collect flown flights (total over all aircraft types) ---
+flight_lines = []
+for i in cities:
+    for j in cities:
+        total_flights_ij = sum(z[i, j, k].x for k in aircraft_types if z[i, j, k].x > 0)
+        if total_flights_ij > 0 and i != j:
+            lon_i, lat_i = coords[i]
+            lon_j, lat_j = coords[j]
+            flight_lines.append((lon_i, lat_i, lon_j, lat_j, total_flights_ij))
+
+# --- Plot ---
+plt.figure(figsize=(10, 10))
+
+# draw airports
+for city, (lon, lat) in coords.items():
+    plt.scatter(lon, lat, s=50, color="black")
+    plt.text(lon + 0.1, lat + 0.1, city, fontsize=9)
+
+# draw flight lines
+for lon_i, lat_i, lon_j, lat_j, freq in flight_lines:
+    plt.plot(
+        [lon_i, lon_j],
+        [lat_i, lat_j],
+        alpha=0.7,
+    )
+
+plt.title("Operated Flight Network")
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.grid(True)
+plt.savefig(BASE_DIR / "Estimated Data/operated_flight_network.png", dpi=300)
+plt.show()
