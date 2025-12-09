@@ -8627,7 +8627,7 @@ Subject To
    + z_Madeira_Palermo_Aircraft_4 = 0
  aircraft_utilization_Aircraft_1:
    0.4166666666666667 z_London_London_Aircraft_1
-   + 1.047879914889809 z_London_Paris_Aircraft_1
+   + 1.256213248223143 z_London_Paris_Aircraft_1
    + 1.090211034187529 z_London_Amsterdam_Aircraft_1
    + 1.607145999853764 z_London_Frankfurt_Aircraft_1
    + 2.682034934927801 z_London_Madrid_Aircraft_1
@@ -8647,7 +8647,7 @@ Subject To
    + 3.751647471689858 z_London_Palermo_Aircraft_1
    + 4.910117264365938 z_London_Madeira_Aircraft_1
    + 1.047879914889809 z_Paris_London_Aircraft_1
-   + 0.4166666666666667 z_Paris_Paris_Aircraft_1
+   + 0.625 z_Paris_Paris_Aircraft_1
    + 1.140793487207822 z_Paris_Amsterdam_Aircraft_1
    + 1.233039519309321 z_Paris_Frankfurt_Aircraft_1
    + 2.352147189670899 z_Paris_Madrid_Aircraft_1
@@ -8667,7 +8667,7 @@ Subject To
    + 3.120921356919221 z_Paris_Palermo_Aircraft_1
    + 4.81937239352755 z_Paris_Madeira_Aircraft_1
    + 1.090211034187529 z_Amsterdam_London_Aircraft_1
-   + 1.140793487207822 z_Amsterdam_Paris_Aircraft_1
+   + 1.349126820541155 z_Amsterdam_Paris_Aircraft_1
    + 0.4166666666666667 z_Amsterdam_Amsterdam_Aircraft_1
    + 1.083171188824791 z_Amsterdam_Frankfurt_Aircraft_1
    + 3.072403908165017 z_Amsterdam_Madrid_Aircraft_1
@@ -8687,7 +8687,7 @@ Subject To
    + 3.529523940356339 z_Amsterdam_Palermo_Aircraft_1
    + 5.477581799541339 z_Amsterdam_Madeira_Aircraft_1
    + 1.607145999853764 z_Frankfurt_London_Aircraft_1
-   + 1.233039519309321 z_Frankfurt_Paris_Aircraft_1
+   + 1.441372852642655 z_Frankfurt_Paris_Aircraft_1
    + 1.083171188824791 z_Frankfurt_Amsterdam_Aircraft_1
    + 0.4166666666666667 z_Frankfurt_Frankfurt_Aircraft_1
    + 3.002213161476047 z_Frankfurt_Madrid_Aircraft_1
@@ -8707,7 +8707,7 @@ Subject To
    + 2.922248998242917 z_Frankfurt_Palermo_Aircraft_1
    + 5.573107112206511 z_Frankfurt_Madeira_Aircraft_1
    + 2.682034934927801 z_Madrid_London_Aircraft_1
-   + 2.352147189670899 z_Madrid_Paris_Aircraft_1
+   + 2.560480523004233 z_Madrid_Paris_Aircraft_1
    + 3.072403908165017 z_Madrid_Amsterdam_Aircraft_1
    + 3.002213161476047 z_Madrid_Frankfurt_Aircraft_1
    + 0.4166666666666667 z_Madrid_Madrid_Aircraft_1
@@ -8727,7 +8727,7 @@ Subject To
    + 3.095676548953308 z_Madrid_Palermo_Aircraft_1
    + 3.070799074258822 z_Madrid_Madeira_Aircraft_1
    + 2.50341823894769 z_Barcelona_London_Aircraft_1
-   + 1.978008665641389 z_Barcelona_Paris_Aircraft_1
+   + 2.186341998974722 z_Barcelona_Paris_Aircraft_1
    + 2.673277146660602 z_Barcelona_Amsterdam_Aircraft_1
    + 2.405051035604414 z_Barcelona_Frankfurt_Aircraft_1
    + 1.294722768076886 z_Barcelona_Madrid_Aircraft_1
@@ -8747,7 +8747,7 @@ Subject To
    + 2.27738616264817 z_Barcelona_Palermo_Aircraft_1
    + 3.911194360911214 z_Barcelona_Madeira_Aircraft_1
    + 2.128630744934411 z_Munich_London_Aircraft_1
-   + 1.655883563635994 z_Munich_Paris_Aircraft_1
+   + 1.864216896969327 z_Munich_Paris_Aircraft_1
    + 1.62424090111945 z_Munich_Amsterdam_Aircraft_1
    + 0.9604369382206779 z_Munich_Frankfurt_Aircraft_1
    + 3.138429175245359 z_Munich_Madrid_Aircraft_1
@@ -8767,7 +8767,7 @@ Subject To
    + 2.499584398941063 z_Munich_Palermo_Aircraft_1
    + 5.776451666962064 z_Munich_Madeira_Aircraft_1
    + 3.041913458737232 z_Rome_London_Aircraft_1
-   + 2.417926375642258 z_Rome_Paris_Aircraft_1
+   + 2.626259708975591 z_Rome_Paris_Aircraft_1
    + 2.774518370820265 z_Rome_Amsterdam_Aircraft_1
    + 2.158720696045048 z_Rome_Frankfurt_Aircraft_1
    + 2.834173268669213 z_Rome_Madrid_Aircraft_1
@@ -8787,7 +8787,7 @@ Subject To
    + 1.180920456624045 z_Rome_Palermo_Aircraft_1
    + 5.405558319615039 z_Rome_Madeira_Aircraft_1
    + 1.233495109540072 z_Dublin_London_Aircraft_1
-   + 1.843883642854182 z_Dublin_Paris_Aircraft_1
+   + 2.052216976187515 z_Dublin_Paris_Aircraft_1
    + 1.780598041267641 z_Dublin_Amsterdam_Aircraft_1
    + 2.392837611414649 z_Dublin_Frankfurt_Aircraft_1
    + 3.060712337507798 z_Dublin_Madrid_Aircraft_1
@@ -8807,7 +8807,7 @@ Subject To
    + 4.53752488036284 z_Dublin_Palermo_Aircraft_1
    + 4.873385049711008 z_Dublin_Madeira_Aircraft_1
    + 3.075826586655028 z_Stockholm_London_Aircraft_1
-   + 3.21513124455592 z_Stockholm_Paris_Aircraft_1
+   + 3.423464577889253 z_Stockholm_Paris_Aircraft_1
    + 2.511518046031584 z_Stockholm_Amsterdam_Aircraft_1
    + 2.640279712785345 z_Stockholm_Frankfurt_Aircraft_1
    + 5.146392795305147 z_Stockholm_Madrid_Aircraft_1
@@ -8827,7 +8827,7 @@ Subject To
    + 4.81200108446204 z_Stockholm_Palermo_Aircraft_1
    + 7.560561487744264 z_Stockholm_Madeira_Aircraft_1
    + 3.260175716489718 z_Lisbon_London_Aircraft_1
-   + 3.089327187197466 z_Lisbon_Paris_Aircraft_1
+   + 3.297660520530799 z_Lisbon_Paris_Aircraft_1
    + 3.773569631034188 z_Lisbon_Amsterdam_Aircraft_1
    + 3.82366132172463 z_Lisbon_Frankfurt_Aircraft_1
    + 1.34918404564303 z_Lisbon_Madrid_Aircraft_1
@@ -8847,7 +8847,7 @@ Subject To
    + 3.964945399200873 z_Lisbon_Palermo_Aircraft_1
    + 2.17146476945569 z_Lisbon_Madeira_Aircraft_1
    + 2.138929315772601 z_Berlin_London_Aircraft_1
-   + 1.96302575232042 z_Berlin_Paris_Aircraft_1
+   + 2.171359085653753 z_Berlin_Paris_Aircraft_1
    + 1.467915130116011 z_Berlin_Amsterdam_Aircraft_1
    + 1.201544165751905 z_Berlin_Frankfurt_Aircraft_1
    + 3.786923017278397 z_Berlin_Madrid_Aircraft_1
@@ -8867,7 +8867,7 @@ Subject To
    + 3.337840475227884 z_Berlin_Palermo_Aircraft_1
    + 6.349150424145012 z_Berlin_Madeira_Aircraft_1
    + 3.776585878004526 z_Helsinki_London_Aircraft_1
-   + 3.863136183862171 z_Helsinki_Paris_Aircraft_1
+   + 4.071469517195505 z_Helsinki_Paris_Aircraft_1
    + 3.182672789904947 z_Helsinki_Amsterdam_Aircraft_1
    + 3.212919380321048 z_Helsinki_Frankfurt_Aircraft_1
    + 5.775634070525856 z_Helsinki_Madrid_Aircraft_1
@@ -8887,7 +8887,7 @@ Subject To
    + 5.146130886894387 z_Helsinki_Palermo_Aircraft_1
    + 8.243485523589484 z_Helsinki_Madeira_Aircraft_1
    + 3.08867501638885 z_Warsaw_London_Aircraft_1
-   + 2.857563094174788 z_Warsaw_Paris_Aircraft_1
+   + 3.065896427508121 z_Warsaw_Paris_Aircraft_1
    + 2.418792693175404 z_Warsaw_Amsterdam_Aircraft_1
    + 2.046196259304738 z_Warsaw_Frankfurt_Aircraft_1
    + 4.545997749228171 z_Warsaw_Madrid_Aircraft_1
@@ -8907,7 +8907,7 @@ Subject To
    + 3.456499479789341 z_Warsaw_Palermo_Aircraft_1
    + 7.16952663203561 z_Warsaw_Madeira_Aircraft_1
    + 1.386721660716018 z_Edinburgh_London_Aircraft_1
-   + 1.996079146499259 z_Edinburgh_Paris_Aircraft_1
+   + 2.204412479832592 z_Edinburgh_Paris_Aircraft_1
    + 1.628236906001155 z_Edinburgh_Amsterdam_Aircraft_1
    + 2.294591149753451 z_Edinburgh_Frankfurt_Aircraft_1
    + 3.546016052307367 z_Edinburgh_Madrid_Aircraft_1
@@ -8927,7 +8927,7 @@ Subject To
    + 4.669088284227772 z_Edinburgh_Palermo_Aircraft_1
    + 5.480908187953045 z_Edinburgh_Madeira_Aircraft_1
    + 4.24175033547194 z_Bucharest_London_Aircraft_1
-   + 3.780545835541971 z_Bucharest_Paris_Aircraft_1
+   + 3.988879168875305 z_Bucharest_Paris_Aircraft_1
    + 3.65885529960952 z_Bucharest_Amsterdam_Aircraft_1
    + 3.051298008745455 z_Bucharest_Frankfurt_Aircraft_1
    + 4.885707563052111 z_Bucharest_Madrid_Aircraft_1
@@ -8947,7 +8947,7 @@ Subject To
    + 2.749917347472134 z_Bucharest_Palermo_Aircraft_1
    + 7.504737693791045 z_Bucharest_Madeira_Aircraft_1
    + 5.352441858823271 z_Heraklion_London_Aircraft_1
-   + 4.761838431986165 z_Heraklion_Paris_Aircraft_1
+   + 4.970171765319498 z_Heraklion_Paris_Aircraft_1
    + 4.927456037860262 z_Heraklion_Amsterdam_Aircraft_1
    + 4.261007125828893 z_Heraklion_Frankfurt_Aircraft_1
    + 5.095434968455266 z_Heraklion_Madrid_Aircraft_1
@@ -8967,7 +8967,7 @@ Subject To
    + 2.417924939154137 z_Heraklion_Palermo_Aircraft_1
    + 7.415095847621679 z_Heraklion_Madeira_Aircraft_1
    + 3.862111097502047 z_Reykjavik_London_Aircraft_1
-   + 4.49135233154158 z_Reykjavik_Paris_Aircraft_1
+   + 4.699685664874913 z_Reykjavik_Paris_Aircraft_1
    + 4.121506911564173 z_Reykjavik_Amsterdam_Aircraft_1
    + 4.782511434295145 z_Reykjavik_Frankfurt_Aircraft_1
    + 5.67539907152441 z_Reykjavik_Madrid_Aircraft_1
@@ -8987,7 +8987,7 @@ Subject To
    + 7.184274570676982 z_Reykjavik_Palermo_Aircraft_1
    + 6.784531860494826 z_Reykjavik_Madeira_Aircraft_1
    + 3.751647471689858 z_Palermo_London_Aircraft_1
-   + 3.120921356919221 z_Palermo_Paris_Aircraft_1
+   + 3.329254690252554 z_Palermo_Paris_Aircraft_1
    + 3.529523940356339 z_Palermo_Amsterdam_Aircraft_1
    + 2.922248998242917 z_Palermo_Frankfurt_Aircraft_1
    + 3.095676548953308 z_Palermo_Madrid_Aircraft_1
@@ -9007,7 +9007,7 @@ Subject To
    + 0.4166666666666667 z_Palermo_Palermo_Aircraft_1
    + 5.470540244106266 z_Palermo_Madeira_Aircraft_1
    + 4.910117264365938 z_Madeira_London_Aircraft_1
-   + 4.81937239352755 z_Madeira_Paris_Aircraft_1
+   + 5.027705726860883 z_Madeira_Paris_Aircraft_1
    + 5.477581799541339 z_Madeira_Amsterdam_Aircraft_1
    + 5.573107112206511 z_Madeira_Frankfurt_Aircraft_1
    + 3.070799074258822 z_Madeira_Madrid_Aircraft_1
@@ -9029,7 +9029,7 @@ Subject To
    <= 0
  aircraft_utilization_Aircraft_2:
    0.5833333333333334 z_London_London_Aircraft_2
-   + 1.006708072995197 z_London_Paris_Aircraft_2
+   + 1.298374739661864 z_London_Paris_Aircraft_2
    + 1.0351008969144 z_London_Amsterdam_Aircraft_2
    + 1.381825569007606 z_London_Frankfurt_Aircraft_2
    + 2.102787659606045 z_London_Madrid_Aircraft_2
@@ -9049,7 +9049,7 @@ Subject To
    + 2.820210702556206 z_London_Palermo_Aircraft_2
    + 3.597233124473088 z_London_Madeira_Aircraft_2
    + 1.006708072995197 z_Paris_London_Aircraft_2
-   + 0.5833333333333334 z_Paris_Paris_Aircraft_2
+   + 0.875 z_Paris_Paris_Aircraft_2
    + 1.069028151988986 z_Paris_Amsterdam_Aircraft_2
    + 1.13090049059365 z_Paris_Frankfurt_Aircraft_2
    + 1.881521489006904 z_Paris_Madrid_Aircraft_2
@@ -9069,7 +9069,7 @@ Subject To
    + 2.397162698746632 z_Paris_Palermo_Aircraft_2
    + 3.536367662325389 z_Paris_Madeira_Aircraft_2
    + 1.0351008969144 z_Amsterdam_London_Aircraft_2
-   + 1.069028151988986 z_Amsterdam_Paris_Aircraft_2
+   + 1.360694818655653 z_Amsterdam_Paris_Aircraft_2
    + 0.5833333333333334 z_Amsterdam_Amsterdam_Aircraft_2
    + 1.030379049415002 z_Amsterdam_Frankfurt_Aircraft_2
    + 2.364620507509057 z_Amsterdam_Madrid_Aircraft_2
@@ -9089,7 +9089,7 @@ Subject To
    + 2.671225407149577 z_Amsterdam_Palermo_Aircraft_2
    + 3.977849580993174 z_Amsterdam_Madeira_Aircraft_2
    + 1.381825569007606 z_Frankfurt_London_Aircraft_2
-   + 1.13090049059365 z_Frankfurt_Paris_Aircraft_2
+   + 1.422567157260317 z_Frankfurt_Paris_Aircraft_2
    + 1.030379049415002 z_Frankfurt_Amsterdam_Aircraft_2
    + 0.5833333333333334 z_Frankfurt_Frankfurt_Aircraft_2
    + 2.317541348144503 z_Frankfurt_Madrid_Aircraft_2
@@ -9109,7 +9109,7 @@ Subject To
    + 2.263906848414964 z_Frankfurt_Palermo_Aircraft_2
    + 4.041921437049083 z_Frankfurt_Madeira_Aircraft_2
    + 2.102787659606045 z_Madrid_London_Aircraft_2
-   + 1.881521489006904 z_Madrid_Paris_Aircraft_2
+   + 2.173188155673571 z_Madrid_Paris_Aircraft_2
    + 2.364620507509057 z_Madrid_Amsterdam_Aircraft_2
    + 2.317541348144503 z_Madrid_Frankfurt_Aircraft_2
    + 0.5833333333333334 z_Madrid_Madrid_Aircraft_2
@@ -9129,7 +9129,7 @@ Subject To
    + 2.380230205598764 z_Madrid_Palermo_Aircraft_2
    + 2.363544094523194 z_Madrid_Madeira_Aircraft_2
    + 1.982983778155971 z_Barcelona_London_Aircraft_2
-   + 1.630574918011501 z_Barcelona_Paris_Aircraft_2
+   + 1.922241584678168 z_Barcelona_Paris_Aircraft_2
    + 2.096913533329266 z_Barcelona_Amsterdam_Aircraft_2
    + 1.91700577591353 z_Barcelona_Frankfurt_Aircraft_2
    + 1.172273401352383 z_Barcelona_Madrid_Aircraft_2
@@ -9149,7 +9149,7 @@ Subject To
    + 1.831376897711171 z_Barcelona_Palermo_Aircraft_2
    + 2.927223859960774 z_Barcelona_Madeira_Aircraft_2
    + 1.731601922415357 z_Munich_London_Aircraft_2
-   + 1.414515398373736 z_Munich_Paris_Aircraft_2
+   + 1.706182065040402 z_Munich_Paris_Aircraft_2
    + 1.393291661319956 z_Munich_Amsterdam_Aircraft_2
    + 0.9480572959610237 z_Munich_Frankfurt_Aircraft_2
    + 2.40890574762392 z_Munich_Madrid_Aircraft_2
@@ -9169,7 +9169,7 @@ Subject To
    + 1.980412300102746 z_Munich_Palermo_Aircraft_2
    + 4.178311077433905 z_Munich_Madeira_Aircraft_2
    + 2.344169596307494 z_Rome_London_Aircraft_2
-   + 1.925641674719401 z_Rome_Paris_Aircraft_2
+   + 2.217308341386067 z_Rome_Paris_Aircraft_2
    + 2.164819232460747 z_Rome_Amsterdam_Aircraft_2
    + 1.751784206696882 z_Rome_Frankfurt_Aircraft_2
    + 2.204831663944798 z_Rome_Madrid_Aircraft_2
@@ -9189,7 +9189,7 @@ Subject To
    + 1.09594258269499 z_Rome_Palermo_Aircraft_2
    + 3.929541149335291 z_Rome_Madeira_Aircraft_2
    + 1.131206069406959 z_Dublin_London_Aircraft_2
-   + 1.540613012483496 z_Dublin_Paris_Aircraft_2
+   + 1.832279679150163 z_Dublin_Paris_Aircraft_2
    + 1.498165352882768 z_Dublin_Amsterdam_Aircraft_2
    + 1.908813845054541 z_Dublin_Frankfurt_Aircraft_2
    + 2.356778600360922 z_Dublin_Madrid_Aircraft_2
@@ -9209,7 +9209,7 @@ Subject To
    + 3.347323598617352 z_Dublin_Palermo_Aircraft_2
    + 3.57259566342405 z_Dublin_Madeira_Aircraft_2
    + 2.366916206496259 z_Stockholm_London_Aircraft_2
-   + 2.460352257527345 z_Stockholm_Paris_Aircraft_2
+   + 2.752018924194012 z_Stockholm_Paris_Aircraft_2
    + 1.988416575590291 z_Stockholm_Amsterdam_Aircraft_2
    + 2.074781108169033 z_Stockholm_Frankfurt_Aircraft_2
    + 3.755710614737192 z_Stockholm_Madrid_Aircraft_2
@@ -9229,7 +9229,7 @@ Subject To
    + 3.531423491610718 z_Stockholm_Palermo_Aircraft_2
    + 5.374970103568307 z_Stockholm_Madeira_Aircraft_2
    + 2.490565013092697 z_Lisbon_London_Aircraft_2
-   + 2.375971487347894 z_Lisbon_Paris_Aircraft_2
+   + 2.66763815401456 z_Lisbon_Paris_Aircraft_2
    + 2.834914589921305 z_Lisbon_Amsterdam_Aircraft_2
    + 2.868512675140504 z_Lisbon_Frankfurt_Aircraft_2
    + 1.208802307036992 z_Lisbon_Madrid_Aircraft_2
@@ -9249,7 +9249,7 @@ Subject To
    + 2.963276385642862 z_Lisbon_Palermo_Aircraft_2
    + 1.760332060813776 z_Lisbon_Madeira_Aircraft_2
    + 1.738509500416582 z_Berlin_London_Aircraft_2
-   + 1.620525402979143 z_Berlin_Paris_Aircraft_2
+   + 1.91219206964581 z_Berlin_Paris_Aircraft_2
    + 1.288439010037162 z_Berlin_Amsterdam_Aircraft_2
    + 1.10977555832953 z_Berlin_Frankfurt_Aircraft_2
    + 2.843871129475348 z_Berlin_Madrid_Aircraft_2
@@ -9269,7 +9269,7 @@ Subject To
    + 2.542657229319516 z_Berlin_Palermo_Aircraft_2
    + 4.562438292617589 z_Berlin_Madeira_Aircraft_2
    + 2.83693768240141 z_Helsinki_London_Aircraft_2
-   + 2.894989716818123 z_Helsinki_Paris_Aircraft_2
+   + 3.18665638348479 z_Helsinki_Paris_Aircraft_2
    + 2.438581342822424 z_Helsinki_Amsterdam_Aircraft_2
    + 2.458868690052736 z_Helsinki_Frankfurt_Aircraft_2
    + 4.17776268958035 z_Helsinki_Madrid_Aircraft_2
@@ -9289,7 +9289,7 @@ Subject To
    + 3.755534944461682 z_Helsinki_Palermo_Aircraft_2
    + 5.833028908098639 z_Helsinki_Madeira_Aircraft_2
    + 2.375534055707968 z_Warsaw_London_Aircraft_2
-   + 2.22051996154 z_Warsaw_Paris_Aircraft_2
+   + 2.512186628206667 z_Warsaw_Paris_Aircraft_2
    + 1.926222741357487 z_Warsaw_Amsterdam_Aircraft_2
    + 1.676310499127161 z_Warsaw_Frankfurt_Aircraft_2
    + 3.353006620417269 z_Warsaw_Madrid_Aircraft_2
@@ -9309,7 +9309,7 @@ Subject To
    + 2.622245586037566 z_Warsaw_Palermo_Aircraft_2
    + 5.112690627178355 z_Warsaw_Madeira_Aircraft_2
    + 1.233979975683508 z_Edinburgh_London_Aircraft_2
-   + 1.64269536248934 z_Edinburgh_Paris_Aircraft_2
+   + 1.934362029156007 z_Edinburgh_Paris_Aircraft_2
    + 1.39597190849671 z_Edinburgh_Amsterdam_Aircraft_2
    + 1.842916828086664 z_Edinburgh_Frankfurt_Aircraft_2
    + 2.682287189555755 z_Edinburgh_Madrid_Aircraft_2
@@ -9329,7 +9329,7 @@ Subject To
    + 3.435567345112124 z_Edinburgh_Palermo_Aircraft_2
    + 3.980080695171758 z_Edinburgh_Madeira_Aircraft_2
    + 3.148938233141748 z_Bucharest_London_Aircraft_2
-   + 2.839593751481404 z_Bucharest_Paris_Aircraft_2
+   + 3.13126041814807 z_Bucharest_Paris_Aircraft_2
    + 2.757972050551101 z_Bucharest_Amsterdam_Aircraft_2
    + 2.350464111556911 z_Bucharest_Frankfurt_Aircraft_2
    + 3.580860763835765 z_Bucharest_Madrid_Aircraft_2
@@ -9349,7 +9349,7 @@ Subject To
    + 2.148318546068708 z_Bucharest_Palermo_Aircraft_2
    + 5.337527314941148 z_Bucharest_Madeira_Aircraft_2
    + 3.893914254901788 z_Heraklion_London_Aircraft_2
-   + 3.497777810072022 z_Heraklion_Paris_Aircraft_2
+   + 3.789444476738688 z_Heraklion_Paris_Aircraft_2
    + 3.60886278962172 z_Heraklion_Amsterdam_Aircraft_2
    + 3.161854373015315 z_Heraklion_Frankfurt_Aircraft_2
    + 3.721531584533003 z_Heraklion_Madrid_Aircraft_2
@@ -9369,7 +9369,7 @@ Subject To
    + 1.925640711221271 z_Heraklion_Palermo_Aircraft_2
    + 5.277401686412914 z_Heraklion_Madeira_Aircraft_2
    + 2.89430215889365 z_Reykjavik_London_Aircraft_2
-   + 3.316354206115287 z_Reykjavik_Paris_Aircraft_2
+   + 3.608020872781954 z_Reykjavik_Paris_Aircraft_2
    + 3.068287156130441 z_Reykjavik_Amsterdam_Aircraft_2
    + 3.511643848206094 z_Reykjavik_Frankfurt_Aircraft_2
    + 4.110531897567186 z_Reykjavik_Madrid_Aircraft_2
@@ -9389,7 +9389,7 @@ Subject To
    + 5.122582537242691 z_Reykjavik_Palermo_Aircraft_2
    + 4.854462426754659 z_Reykjavik_Madeira_Aircraft_2
    + 2.820210702556206 z_Palermo_London_Aircraft_2
-   + 2.397162698746632 z_Palermo_Paris_Aircraft_2
+   + 2.688829365413299 z_Palermo_Paris_Aircraft_2
    + 2.671225407149577 z_Palermo_Amsterdam_Aircraft_2
    + 2.263906848414964 z_Palermo_Frankfurt_Aircraft_2
    + 2.380230205598764 z_Palermo_Madrid_Aircraft_2
@@ -9409,7 +9409,7 @@ Subject To
    + 0.5833333333333334 z_Palermo_Palermo_Aircraft_2
    + 3.97312658649404 z_Palermo_Madeira_Aircraft_2
    + 3.597233124473088 z_Madeira_London_Aircraft_2
-   + 3.536367662325389 z_Madeira_Paris_Aircraft_2
+   + 3.828034328992056 z_Madeira_Paris_Aircraft_2
    + 3.977849580993174 z_Madeira_Amsterdam_Aircraft_2
    + 4.041921437049083 z_Madeira_Frankfurt_Aircraft_2
    + 2.363544094523194 z_Madeira_Madrid_Aircraft_2
@@ -9430,7 +9430,7 @@ Subject To
    + 0.5833333333333334 z_Madeira_Madeira_Aircraft_2 - 70 AC_Aircraft_2
    <= 0
  aircraft_utilization_Aircraft_3: 0.75 z_London_London_Aircraft_3
-   + 1.158432101791445 z_London_Paris_Aircraft_3
+   + 1.533432101791445 z_London_Paris_Aircraft_3
    + 1.185822826042911 z_London_Amsterdam_Aircraft_3
    + 1.520310156768121 z_London_Frankfurt_Aircraft_3
    + 2.21582652652191 z_London_Madrid_Aircraft_3
@@ -9450,7 +9450,7 @@ Subject To
    + 2.907928756191477 z_London_Palermo_Aircraft_3
    + 3.657526857334823 z_London_Madeira_Aircraft_3
    + 1.158432101791445 z_Paris_London_Aircraft_3
-   + 0.75 z_Paris_Paris_Aircraft_3
+   + 1.125 z_Paris_Paris_Aircraft_3
    + 1.218552648585453 z_Paris_Amsterdam_Aircraft_3
    + 1.278241257592306 z_Paris_Frankfurt_Aircraft_3
    + 2.002369750179209 z_Paris_Madrid_Aircraft_3
@@ -9470,7 +9470,7 @@ Subject To
    + 2.499811858398711 z_Paris_Palermo_Aircraft_3
    + 3.598809587968806 z_Paris_Madeira_Aircraft_3
    + 1.185822826042911 z_Amsterdam_London_Aircraft_3
-   + 1.218552648585453 z_Amsterdam_Paris_Aircraft_3
+   + 1.593552648585453 z_Amsterdam_Paris_Aircraft_3
    + 0.75 z_Amsterdam_Amsterdam_Aircraft_3
    + 1.181267631984669 z_Amsterdam_Frankfurt_Aircraft_3
    + 2.468418215087168 z_Amsterdam_Madrid_Aircraft_3
@@ -9490,7 +9490,7 @@ Subject To
    + 2.764201765328612 z_Amsterdam_Palermo_Aircraft_3
    + 4.024709791860081 z_Amsterdam_Madeira_Aircraft_3
    + 1.520310156768121 z_Frankfurt_London_Aircraft_3
-   + 1.278241257592306 z_Frankfurt_Paris_Aircraft_3
+   + 1.653241257592306 z_Frankfurt_Paris_Aircraft_3
    + 1.181267631984669 z_Frankfurt_Amsterdam_Aircraft_3
    + 0.75 z_Frankfurt_Frankfurt_Aircraft_3
    + 2.423000673111952 z_Frankfurt_Madrid_Aircraft_3
@@ -9510,7 +9510,7 @@ Subject To
    + 2.371259155725809 z_Frankfurt_Palermo_Aircraft_3
    + 4.086520288290487 z_Frankfurt_Madeira_Aircraft_3
    + 2.21582652652191 z_Madrid_London_Aircraft_3
-   + 2.002369750179209 z_Madrid_Paris_Aircraft_3
+   + 2.377369750179209 z_Madrid_Paris_Aircraft_3
    + 2.468418215087168 z_Madrid_Amsterdam_Aircraft_3
    + 2.423000673111952 z_Madrid_Frankfurt_Aircraft_3
    + 0.75 z_Madrid_Madrid_Aircraft_3
@@ -9530,7 +9530,7 @@ Subject To
    + 2.483476982656062 z_Madrid_Palermo_Aircraft_3
    + 2.467379793147865 z_Madrid_Madeira_Aircraft_3
    + 2.10025101735831 z_Barcelona_London_Aircraft_3
-   + 1.760280116983644 z_Barcelona_Paris_Aircraft_3
+   + 2.135280116983644 z_Barcelona_Paris_Aircraft_3
    + 2.210159722349017 z_Barcelona_Amsterdam_Aircraft_3
    + 2.036601650489131 z_Barcelona_Frankfurt_Aircraft_3
    + 1.318153947971318 z_Barcelona_Madrid_Aircraft_3
@@ -9550,7 +9550,7 @@ Subject To
    + 1.953994967988032 z_Barcelona_Palermo_Aircraft_3
    + 3.011164978628825 z_Barcelona_Madeira_Aircraft_3
    + 1.85774146240854 z_Munich_London_Aircraft_3
-   + 1.551846227450741 z_Munich_Paris_Aircraft_3
+   + 1.926846227450741 z_Munich_Paris_Aircraft_3
    + 1.531371563469448 z_Munich_Amsterdam_Aircraft_3
    + 1.101851352182007 z_Munich_Frankfurt_Aircraft_3
    + 2.511140446727389 z_Munich_Madrid_Aircraft_3
@@ -9570,7 +9570,7 @@ Subject To
    + 2.097770297354021 z_Munich_Palermo_Aircraft_3
    + 4.218096176661728 z_Munich_Madeira_Aircraft_3
    + 2.448689100751543 z_Rome_London_Aircraft_3
-   + 2.044932752866559 z_Rome_Paris_Aircraft_3
+   + 2.419932752866559 z_Rome_Paris_Aircraft_3
    + 2.275668749746446 z_Rome_Amsterdam_Aircraft_3
    + 1.877211430774247 z_Rome_Frankfurt_Aircraft_3
    + 2.314268977766354 z_Rome_Madrid_Aircraft_3
@@ -9590,7 +9590,7 @@ Subject To
    + 1.244517158207715 z_Rome_Palermo_Aircraft_3
    + 3.978106363672476 z_Rome_Madeira_Aircraft_3
    + 1.278536051271027 z_Dublin_London_Aircraft_3
-   + 1.673493337533098 z_Dublin_Paris_Aircraft_3
+   + 2.048493337533098 z_Dublin_Paris_Aircraft_3
    + 1.63254383062416 z_Dublin_Amsterdam_Aircraft_3
    + 2.028698846601635 z_Dublin_Frankfurt_Aircraft_3
    + 2.460853081132497 z_Dublin_Madrid_Aircraft_3
@@ -9610,7 +9610,7 @@ Subject To
    + 3.416437667685759 z_Dublin_Palermo_Aircraft_3
    + 3.633758953734574 z_Dublin_Madeira_Aircraft_3
    + 2.470632889404234 z_Stockholm_London_Aircraft_3
-   + 2.560771197457752 z_Stockholm_Paris_Aircraft_3
+   + 2.935771197457752 z_Stockholm_Paris_Aircraft_3
    + 2.105492069000829 z_Stockholm_Amsterdam_Aircraft_3
    + 2.188808441606204 z_Stockholm_Frankfurt_Aircraft_3
    + 3.810411024413134 z_Stockholm_Madrid_Aircraft_3
@@ -9630,7 +9630,7 @@ Subject To
    + 3.594039917397006 z_Stockholm_Palermo_Aircraft_3
    + 5.372520178344327 z_Stockholm_Madeira_Aircraft_3
    + 2.58991762047374 z_Lisbon_London_Aircraft_3
-   + 2.479368572108164 z_Lisbon_Paris_Aircraft_3
+   + 2.854368572108164 z_Lisbon_Paris_Aircraft_3
    + 2.922113682826043 z_Lisbon_Amsterdam_Aircraft_3
    + 2.9545259532728 z_Lisbon_Frankfurt_Aircraft_3
    + 1.353393598161176 z_Lisbon_Madrid_Aircraft_3
@@ -9650,7 +9650,7 @@ Subject To
    + 3.045945062228016 z_Lisbon_Palermo_Aircraft_3
    + 1.885457595922309 z_Lisbon_Madeira_Aircraft_3
    + 1.864405243539135 z_Berlin_London_Aircraft_3
-   + 1.750585290717134 z_Berlin_Paris_Aircraft_3
+   + 2.125585290717134 z_Berlin_Paris_Aircraft_3
    + 1.430219593996634 z_Berlin_Amsterdam_Aircraft_3
    + 1.257861911172801 z_Berlin_Frankfurt_Aircraft_3
    + 2.930754109219355 z_Berlin_Madrid_Aircraft_3
@@ -9670,7 +9670,7 @@ Subject To
    + 2.640171287892552 z_Berlin_Palermo_Aircraft_3
    + 4.588665960721283 z_Berlin_Madeira_Aircraft_3
    + 2.924065372042144 z_Helsinki_London_Aircraft_3
-   + 2.980068511126503 z_Helsinki_Paris_Aircraft_3
+   + 3.355068511126503 z_Helsinki_Paris_Aircraft_3
    + 2.539768667977711 z_Helsinki_Amsterdam_Aircraft_3
    + 2.559339991188129 z_Helsinki_Frankfurt_Aircraft_3
    + 4.217567143673593 z_Helsinki_Madrid_Aircraft_3
@@ -9690,7 +9690,7 @@ Subject To
    + 3.810241554264995 z_Helsinki_Palermo_Aircraft_3
    + 5.814412201538294 z_Helsinki_Madeira_Aircraft_3
    + 2.478946579232001 z_Warsaw_London_Aircraft_3
-   + 2.329403570740549 z_Warsaw_Paris_Aircraft_3
+   + 2.704403570740549 z_Warsaw_Paris_Aircraft_3
    + 2.045493311270359 z_Warsaw_Amsterdam_Aircraft_3
    + 1.804401501118752 z_Warsaw_Frankfurt_Aircraft_3
    + 3.421920112245679 z_Warsaw_Madrid_Aircraft_3
@@ -9710,7 +9710,7 @@ Subject To
    + 2.71695064378526 z_Warsaw_Palermo_Aircraft_3
    + 5.119497624650492 z_Warsaw_Madeira_Aircraft_3
    + 1.377682643208404 z_Edinburgh_London_Aircraft_3
-   + 1.771972781068148 z_Edinburgh_Paris_Aircraft_3
+   + 2.146972781068148 z_Edinburgh_Paris_Aircraft_3
    + 1.533957213687022 z_Edinburgh_Amsterdam_Aircraft_3
    + 1.965127606703213 z_Edinburgh_Frankfurt_Aircraft_3
    + 2.774873131885159 z_Edinburgh_Madrid_Aircraft_3
@@ -9730,7 +9730,7 @@ Subject To
    + 3.501566929010127 z_Edinburgh_Palermo_Aircraft_3
    + 4.026862160832362 z_Edinburgh_Madeira_Aircraft_3
    + 3.225054138638706 z_Bucharest_London_Aircraft_3
-   + 2.92662769750755 z_Bucharest_Paris_Aircraft_3
+   + 3.30162769750755 z_Bucharest_Paris_Aircraft_3
    + 2.847886762492434 z_Bucharest_Amsterdam_Aircraft_3
    + 2.454761456639216 z_Bucharest_Frankfurt_Aircraft_3
    + 3.641732344719993 z_Bucharest_Madrid_Aircraft_3
@@ -9750,7 +9750,7 @@ Subject To
    + 2.259750440521185 z_Bucharest_Palermo_Aircraft_3
    + 5.33639889990401 z_Bucharest_Madeira_Aircraft_3
    + 3.943736889042509 z_Heraklion_London_Aircraft_3
-   + 3.561581730500852 z_Heraklion_Paris_Aircraft_3
+   + 3.936581730500852 z_Heraklion_Paris_Aircraft_3
    + 3.668746063713503 z_Heraklion_Amsterdam_Aircraft_3
    + 3.237514414752029 z_Heraklion_Frankfurt_Aircraft_3
    + 3.777438312922035 z_Heraklion_Madrid_Aircraft_3
@@ -9770,7 +9770,7 @@ Subject To
    + 2.044931823374245 z_Heraklion_Palermo_Aircraft_3
    + 5.278395352382655 z_Heraklion_Madeira_Aircraft_3
    + 2.979405219952305 z_Reykjavik_London_Aircraft_3
-   + 3.38656131256612 z_Reykjavik_Paris_Aircraft_3
+   + 3.76156131256612 z_Reykjavik_Paris_Aircraft_3
    + 3.147249570227798 z_Reykjavik_Amsterdam_Aircraft_3
    + 3.574958379053721 z_Reykjavik_Frankfurt_Aircraft_3
    + 4.152709203143246 z_Reykjavik_Madrid_Aircraft_3
@@ -9790,7 +9790,7 @@ Subject To
    + 5.129040408477263 z_Reykjavik_Palermo_Aircraft_3
    + 4.870383360712338 z_Reykjavik_Madeira_Aircraft_3
    + 2.907928756191477 z_Palermo_London_Aircraft_3
-   + 2.499811858398711 z_Palermo_Paris_Aircraft_3
+   + 2.874811858398711 z_Palermo_Paris_Aircraft_3
    + 2.764201765328612 z_Palermo_Amsterdam_Aircraft_3
    + 2.371259155725809 z_Palermo_Frankfurt_Aircraft_3
    + 2.483476982656062 z_Palermo_Madrid_Aircraft_3
@@ -9810,7 +9810,7 @@ Subject To
    + 0.75 z_Palermo_Palermo_Aircraft_3
    + 4.020153491284447 z_Palermo_Madeira_Aircraft_3
    + 3.657526857334823 z_Madeira_London_Aircraft_3
-   + 3.598809587968806 z_Madeira_Paris_Aircraft_3
+   + 3.973809587968806 z_Madeira_Paris_Aircraft_3
    + 4.024709791860081 z_Madeira_Amsterdam_Aircraft_3
    + 4.086520288290487 z_Madeira_Frankfurt_Aircraft_3
    + 2.467379793147865 z_Madeira_Madrid_Aircraft_3
@@ -9830,7 +9830,7 @@ Subject To
    + 4.020153491284447 z_Madeira_Palermo_Aircraft_3
    + 0.75 z_Madeira_Madeira_Aircraft_3 - 70 AC_Aircraft_3 <= 0
  aircraft_utilization_Aircraft_4: z_London_London_Aircraft_4
-   + 1.399042858072102 z_London_Paris_Aircraft_4
+   + 1.899042858072102 z_London_Paris_Aircraft_4
    + 1.425803910501695 z_London_Amsterdam_Aircraft_4
    + 1.752601877302188 z_London_Frankfurt_Aircraft_4
    + 2.432129364992671 z_London_Madrid_Aircraft_4
@@ -9849,7 +9849,8 @@ Subject To
    + 3.178154525240758 z_London_Reykjavik_Aircraft_4
    + 3.10832119857788 z_London_Palermo_Aircraft_4
    + 3.840687159465056 z_London_Madeira_Aircraft_4
-   + 1.399042858072102 z_Paris_London_Aircraft_4 + z_Paris_Paris_Aircraft_4
+   + 1.399042858072102 z_Paris_London_Aircraft_4
+   + 1.5 z_Paris_Paris_Aircraft_4
    + 1.457781323330615 z_Paris_Amsterdam_Aircraft_4
    + 1.516097780406276 z_Paris_Frankfurt_Aircraft_4
    + 2.223579640979687 z_Paris_Madrid_Aircraft_4
@@ -9869,7 +9870,7 @@ Subject To
    + 2.709586298435523 z_Paris_Palermo_Aircraft_4
    + 3.783319712383316 z_Paris_Madeira_Aircraft_4
    + 1.425803910501695 z_Amsterdam_London_Aircraft_4
-   + 1.457781323330615 z_Amsterdam_Paris_Aircraft_4
+   + 1.957781323330615 z_Amsterdam_Paris_Aircraft_4
    + z_Amsterdam_Amsterdam_Aircraft_4
    + 1.42135343354824 z_Amsterdam_Frankfurt_Aircraft_4
    + 2.67891434807367 z_Amsterdam_Madrid_Aircraft_4
@@ -9889,7 +9890,7 @@ Subject To
    + 2.967898276470483 z_Amsterdam_Palermo_Aircraft_4
    + 4.199429106989735 z_Amsterdam_Madeira_Aircraft_4
    + 1.752601877302188 z_Frankfurt_London_Aircraft_4
-   + 1.516097780406276 z_Frankfurt_Paris_Aircraft_4
+   + 2.016097780406276 z_Frankfurt_Paris_Aircraft_4
    + 1.42135343354824 z_Frankfurt_Amsterdam_Aircraft_4
    + z_Frankfurt_Frankfurt_Aircraft_4
    + 2.634540887523172 z_Frankfurt_Madrid_Aircraft_4
@@ -9909,7 +9910,7 @@ Subject To
    + 2.583988830306825 z_Frankfurt_Palermo_Aircraft_4
    + 4.259818672467717 z_Frankfurt_Madeira_Aircraft_4
    + 2.432129364992671 z_Madrid_London_Aircraft_4
-   + 2.223579640979687 z_Madrid_Paris_Aircraft_4
+   + 2.723579640979687 z_Madrid_Paris_Aircraft_4
    + 2.67891434807367 z_Madrid_Amsterdam_Aircraft_4
    + 2.634540887523172 z_Madrid_Frankfurt_Aircraft_4
    + z_Madrid_Madrid_Aircraft_4
@@ -9929,7 +9930,7 @@ Subject To
    + 2.693626937077762 z_Madrid_Palermo_Aircraft_4
    + 2.677899797903087 z_Madrid_Madeira_Aircraft_4
    + 2.319210764085704 z_Barcelona_London_Aircraft_4
-   + 1.987055286708158 z_Barcelona_Paris_Aircraft_4
+   + 2.487055286708158 z_Barcelona_Paris_Aircraft_4
    + 2.426592832180074 z_Barcelona_Amsterdam_Aircraft_4
    + 2.257024601052599 z_Barcelona_Frankfurt_Aircraft_4
    + 1.555092937673127 z_Barcelona_Madrid_Aircraft_4
@@ -9949,7 +9950,7 @@ Subject To
    + 2.176316922746927 z_Barcelona_Palermo_Aircraft_4
    + 3.209184174522415 z_Barcelona_Madeira_Aircraft_4
    + 2.082276141433631 z_Munich_London_Aircraft_4
-   + 1.783412980842678 z_Munich_Paris_Aircraft_4
+   + 2.283412980842678 z_Munich_Paris_Aircraft_4
    + 1.763408998791989 z_Munich_Amsterdam_Aircraft_4
    + 1.343762815350237 z_Munich_Frankfurt_Aircraft_4
    + 2.7206544594463 z_Munich_Madrid_Aircraft_4
@@ -9969,7 +9970,7 @@ Subject To
    + 2.316787072127492 z_Munich_Palermo_Aircraft_4
    + 4.388369827772952 z_Munich_Madeira_Aircraft_4
    + 2.659638776596335 z_Rome_London_Aircraft_4
-   + 2.265164183835144 z_Rome_Paris_Aircraft_4
+   + 2.765164183835144 z_Rome_Paris_Aircraft_4
    + 2.490595904924689 z_Rome_Amsterdam_Aircraft_4
    + 2.101298524319666 z_Rome_Frankfurt_Aircraft_4
    + 2.52830877138092 z_Rome_Madrid_Aircraft_4
@@ -9988,7 +9989,7 @@ Subject To
    + 1.483148947674205 z_Rome_Palermo_Aircraft_4
    + 4.153897021978857 z_Rome_Madeira_Aircraft_4
    + 1.516385797218819 z_Dublin_London_Aircraft_4
-   + 1.902263605635786 z_Dublin_Paris_Aircraft_4
+   + 2.402263605635786 z_Dublin_Paris_Aircraft_4
    + 1.862255466701766 z_Dublin_Amsterdam_Aircraft_4
    + 2.24930347081769 z_Dublin_Frankfurt_Aircraft_4
    + 2.671523125244394 z_Dublin_Madrid_Aircraft_4
@@ -10008,7 +10009,7 @@ Subject To
    + 3.60514025003781 z_Dublin_Palermo_Aircraft_4
    + 3.817465644453319 z_Dublin_Madeira_Aircraft_4
    + 2.68107811033747 z_Stockholm_London_Aircraft_4
-   + 2.769144273378264 z_Stockholm_Paris_Aircraft_4
+   + 3.269144273378264 z_Stockholm_Paris_Aircraft_4
    + 2.324331331782419 z_Stockholm_Amsterdam_Aircraft_4
    + 2.405732385477326 z_Stockholm_Frankfurt_Aircraft_4
    + 3.990056747989843 z_Stockholm_Madrid_Aircraft_4
@@ -10028,7 +10029,7 @@ Subject To
    + 3.778659689410868 z_Stockholm_Palermo_Aircraft_4
    + 5.516255346658252 z_Stockholm_Madeira_Aircraft_4
    + 2.79762066368124 z_Lisbon_London_Aircraft_4
-   + 2.689612972749356 z_Lisbon_Paris_Aircraft_4
+   + 3.189612972749356 z_Lisbon_Paris_Aircraft_4
    + 3.122180034944985 z_Lisbon_Amsterdam_Aircraft_4
    + 3.153847195726299 z_Lisbon_Frankfurt_Aircraft_4
    + 1.589522480962069 z_Lisbon_Madrid_Aircraft_4
@@ -10048,7 +10049,7 @@ Subject To
    + 3.2431647159699 z_Lisbon_Palermo_Aircraft_4
    + 2.109355122452831 z_Lisbon_Madeira_Aircraft_4
    + 2.088786732193407 z_Berlin_London_Aircraft_4
-   + 1.977583330010993 z_Berlin_Paris_Aircraft_4
+   + 2.477583330010993 z_Berlin_Paris_Aircraft_4
    + 1.664582361950735 z_Berlin_Amsterdam_Aircraft_4
    + 1.496186924709059 z_Berlin_Frankfurt_Aircraft_4
    + 3.130621830846496 z_Berlin_Madrid_Aircraft_4
@@ -10068,7 +10069,7 @@ Subject To
    + 2.846719074377781 z_Berlin_Palermo_Aircraft_4
    + 4.750420766221943 z_Berlin_Madeira_Aircraft_4
    + 3.124086857742325 z_Helsinki_London_Aircraft_4
-   + 3.178802568341986 z_Helsinki_Paris_Aircraft_4
+   + 3.678802568341986 z_Helsinki_Paris_Aircraft_4
    + 2.748624560667879 z_Helsinki_Amsterdam_Aircraft_4
    + 2.767745968402195 z_Helsinki_Frankfurt_Aircraft_4
    + 4.387852956462705 z_Helsinki_Madrid_Aircraft_4
@@ -10088,7 +10089,7 @@ Subject To
    + 3.989891173707179 z_Helsinki_Palermo_Aircraft_4
    + 5.947988932537414 z_Helsinki_Madeira_Aircraft_4
    + 2.689200680858852 z_Warsaw_London_Aircraft_4
-   + 2.543095442677548 z_Warsaw_Paris_Aircraft_4
+   + 3.043095442677548 z_Warsaw_Paris_Aircraft_4
    + 2.265711855838857 z_Warsaw_Amsterdam_Aircraft_4
    + 2.030162386150505 z_Warsaw_Frankfurt_Aircraft_4
    + 3.610496661389457 z_Warsaw_Madrid_Aircraft_4
@@ -10108,7 +10109,7 @@ Subject To
    + 2.921733387606288 z_Warsaw_Palermo_Aircraft_4
    + 5.269049403394159 z_Warsaw_Madeira_Aircraft_4
    + 1.613253157157636 z_Edinburgh_London_Aircraft_4
-   + 1.998479153917156 z_Edinburgh_Paris_Aircraft_4
+   + 2.498479153917156 z_Edinburgh_Paris_Aircraft_4
    + 1.765935208774676 z_Edinburgh_Amsterdam_Aircraft_4
    + 2.187193638733024 z_Edinburgh_Frankfurt_Aircraft_4
    + 2.978324324255615 z_Edinburgh_Madrid_Aircraft_4
@@ -10128,7 +10129,7 @@ Subject To
    + 3.688312516848975 z_Edinburgh_Palermo_Aircraft_4
    + 4.201531996215527 z_Edinburgh_Madeira_Aircraft_4
    + 3.418156342348161 z_Bucharest_London_Aircraft_4
-   + 3.126590279174043 z_Bucharest_Paris_Aircraft_4
+   + 3.626590279174043 z_Bucharest_Paris_Aircraft_4
    + 3.049659480596057 z_Bucharest_Amsterdam_Aircraft_4
    + 2.665571538095786 z_Bucharest_Frankfurt_Aircraft_4
    + 3.825255739094246 z_Bucharest_Madrid_Aircraft_4
@@ -10148,7 +10149,7 @@ Subject To
    + 2.475043533842537 z_Bucharest_Palermo_Aircraft_4
    + 5.480964442434952 z_Bucharest_Madeira_Aircraft_4
    + 4.120317650213945 z_Heraklion_London_Aircraft_4
-   + 3.746947667730717 z_Heraklion_Paris_Aircraft_4
+   + 4.246947667730717 z_Heraklion_Paris_Aircraft_4
    + 3.851648453053422 z_Heraklion_Amsterdam_Aircraft_4
    + 3.430330175332442 z_Heraklion_Frankfurt_Aircraft_4
    + 3.957842029866355 z_Heraklion_Madrid_Aircraft_4
@@ -10168,7 +10169,7 @@ Subject To
    + 2.26516327571047 z_Heraklion_Palermo_Aircraft_4
    + 5.424294309799145 z_Heraklion_Madeira_Aircraft_4
    + 3.178154525240758 z_Reykjavik_London_Aircraft_4
-   + 3.575950707679543 z_Reykjavik_Paris_Aircraft_4
+   + 4.075950707679542 z_Reykjavik_Paris_Aircraft_4
    + 3.34214038470532 z_Reykjavik_Amsterdam_Aircraft_4
    + 3.760016807121452 z_Reykjavik_Frankfurt_Aircraft_4
    + 4.324486003070987 z_Reykjavik_Madrid_Aircraft_4
@@ -10188,7 +10189,7 @@ Subject To
    + 5.278372812880084 z_Reykjavik_Palermo_Aircraft_4
    + 5.025661904144238 z_Reykjavik_Madeira_Aircraft_4
    + 3.10832119857788 z_Palermo_London_Aircraft_4
-   + 2.709586298435523 z_Palermo_Paris_Aircraft_4
+   + 3.209586298435523 z_Palermo_Paris_Aircraft_4
    + 2.967898276470483 z_Palermo_Amsterdam_Aircraft_4
    + 2.583988830306825 z_Palermo_Frankfurt_Aircraft_4
    + 2.693626937077762 z_Palermo_Madrid_Aircraft_4
@@ -10208,7 +10209,7 @@ Subject To
    + z_Palermo_Palermo_Aircraft_4
    + 4.194977548956068 z_Palermo_Madeira_Aircraft_4
    + 3.840687159465056 z_Madeira_London_Aircraft_4
-   + 3.783319712383316 z_Madeira_Paris_Aircraft_4
+   + 4.283319712383316 z_Madeira_Paris_Aircraft_4
    + 4.199429106989735 z_Madeira_Amsterdam_Aircraft_4
    + 4.259818672467717 z_Madeira_Frankfurt_Aircraft_4
    + 2.677899797903087 z_Madeira_Madrid_Aircraft_4

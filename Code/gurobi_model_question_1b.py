@@ -83,6 +83,7 @@ for k in aircraft_types:
 
 
 # Objective: maximize profit
+# Cost times 0.7 as all flights start or end at the hub
 objective = (
     quicksum(
         (distance_dict[i, j] * yield_dict[i, j]) * (x[i, j] + w[i, j])
@@ -151,11 +152,28 @@ for i in cities:
             name=f"aircraft_continuity_{i}_{k}",
         )
 
+# # Constraint 6: aircraft utilization constraint
+# for k in aircraft_types:
+#     model.addConstr(
+#         quicksum(
+#             ((distance_dict[i, j] / speed_dict[k]) + (TAT_dict[k] / 60)) * z[i, j, k]
+#             for i in cities
+#             for j in cities
+#         )
+#         <= BT * AC[k],
+#         name=f"aircraft_utilization_{k}",
+# )
+
 # Constraint 6: aircraft utilization constraint
+# Add adjustment for TAT when the flight is to the hub
 for k in aircraft_types:
     model.addConstr(
         quicksum(
-            ((distance_dict[i, j] / speed_dict[k]) + (TAT_dict[k] / 60)) * z[i, j, k]
+            (
+                (distance_dict[i, j] / speed_dict[k])
+                + ((TAT_dict[k] * (1.5 if j == "Paris" else 1)) / 60)
+            )
+            * z[i, j, k]
             for i in cities
             for j in cities
         )
@@ -199,7 +217,7 @@ for i in cities:
         name=f"slot_constraint_{i}",
     )
 
-model.params.MIPGap = 0.002
+model.params.MIPGap = 0.0075  ##Not ideal but otherwise is takes very long to run
 
 model.update()
 
@@ -230,6 +248,18 @@ if model.status == GRB.OPTIMAL:
     for k in aircraft_types:
         leased_count = sum(v.x for v in model.getVars() if v.varName == f"AC_{k}")
         print(f"{k}: {leased_count}")
+
+print("\n--- Flights per purchased aircraft type ---")
+
+for k in aircraft_types:
+    total_flights_k = sum(z[i, j, k].x for i in cities for j in cities)
+    if AC[k].x > 0:
+        flights_per_aircraft = total_flights_k / AC[k].x
+        print(
+            f"{k}: {total_flights_k:.0f} flights total | "
+            f"{AC[k].x:.0f} aircraft | "
+            f"{flights_per_aircraft:.2f} flights per aircraft"
+        )
 
 # --- Visualization of the operated flight network ---
 
