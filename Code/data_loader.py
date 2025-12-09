@@ -185,13 +185,15 @@ def mix_flow_itineraries_loader():  ##index is itinerary number
 def mix_flow_recapture_loader():  ##Index with both 'from' and 'to' itenerary
     filepath = BASE_DIR / "Problem 2 - Data/Problem 2 - Data/Group_2.xlsx"
     recapture_data = pd.read_excel(filepath, sheet_name="Recapture")
+    recapture_from = recapture_data["From Itinerary"].to_dict()
+    recapture_to = recapture_data["To Itinerary"].to_dict()
     recapture_dict = {
         (row["From Itinerary"], row["To Itinerary"]): (row["Recapture Rate"])
         for _, row in recapture_data.iterrows()
     }
 
-    return recapture_dict
+    return recapture_from, recapture_to, recapture_dict
 
 
-# recapture_dict = mix_flow_recapture_loader()
+# recapture_from, recapture_to, recapture_dict = mix_flow_recapture_loader()
 # print(recapture_dict[4, 14])
