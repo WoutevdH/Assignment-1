@@ -2,7 +2,6 @@ import numpy as np
 from data_loader import *
 import pickle
 from gurobipy import Model, Var, GRB, quicksum
-from data_loader import *
 
 
 (
