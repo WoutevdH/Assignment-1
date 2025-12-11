@@ -3,6 +3,7 @@ import numpy as np
 from data_loader import *
 import pickle
 from gurobipy import Model, Var, GRB, quicksum
+import matplotlib.pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -17,6 +18,7 @@ with open(BASE_DIR / "Estimated Data/distance_dict.pkl", "rb") as file:
 ## This is importing all the yields calculated earlier
 with open(BASE_DIR / "Estimated Data/yield_dict.pkl", "rb") as file:
     yield_dict = pickle.load(file)
+
 
 ## Importing airport data
 ## The index is the city names
@@ -57,10 +59,13 @@ model = Model("network_fleet_development")
 ## Decision variables
 
 # x_ij: direct  flow of passengers from airport i to airport j
+# w_ij: flow from airport i to airport j with transfer at the hub
 x = {}
+w = {}
 for i in cities:
     for j in cities:
         x[i, j] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"x_{i}_{j}")
+        w[i, j] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"w_{i}_{j}")
 
 
 # z_ijk: number of flights from airport i to airport j using aircraft k
@@ -70,11 +75,6 @@ for i in cities:
         for k in aircraft_types:
             z[i, j, k] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"z_{i}_{j}_{k}")
 
-# w_ij: flow from airport i to airport j with transfer at the hub
-w = {}
-for i in cities:
-    for j in cities:
-        w[i, j] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"w_{i}_{j}")
 
 # AC_k: number of aircraft of type k to be leased
 AC = {}
@@ -83,6 +83,7 @@ for k in aircraft_types:
 
 
 # Objective: maximize profit
+# Cost times 0.7 as all flights start or end at the hub
 objective = (
     quicksum(
         (distance_dict[i, j] * yield_dict[i, j]) * (x[i, j] + w[i, j])
@@ -91,6 +92,7 @@ objective = (
     )
     - quicksum(
         z[i, j, k]
+        * 0.7
         * (
             fixed_cost_dict[k]
             + time_cost_param_dict[k] * (distance_dict[i, j] / speed_dict[k])
@@ -150,11 +152,28 @@ for i in cities:
             name=f"aircraft_continuity_{i}_{k}",
         )
 
+# # Constraint 6: aircraft utilization constraint
+# for k in aircraft_types:
+#     model.addConstr(
+#         quicksum(
+#             ((distance_dict[i, j] / speed_dict[k]) + (TAT_dict[k] / 60)) * z[i, j, k]
+#             for i in cities
+#             for j in cities
+#         )
+#         <= BT * AC[k],
+#         name=f"aircraft_utilization_{k}",
+# )
+
 # Constraint 6: aircraft utilization constraint
+# Add adjustment for TAT when the flight is to the hub
 for k in aircraft_types:
     model.addConstr(
         quicksum(
-            ((distance_dict[i, j] / speed_dict[k]) + TAT_dict[k]) * z[i, j, k]
+            (
+                (distance_dict[i, j] / speed_dict[k])
+                + ((TAT_dict[k] * (1.5 if j == "Paris" else 1)) / 60)
+            )
+            * z[i, j, k]
             for i in cities
             for j in cities
         )
@@ -168,12 +187,13 @@ for i in cities:
         if i != j:
             for k in aircraft_types:
                 if distance_dict[i, j] <= range_dict[k]:
-                    a = 7000  # big M
+                    a = 10000  # big M
                 else:
                     a = 0
                 model.addConstr(z[i, j, k] <= a, name=f"range_{i}_{j}_{k}")
 
-# Constraint 8: runway length constraint
+
+# # # Constraint 8: runway length constraint
 for i in cities:
     for j in cities:
         if i != j:
@@ -182,10 +202,22 @@ for i in cities:
                     runway_req_dict[k] <= airport_runway_length[i]
                     and runway_req_dict[k] <= airport_runway_length[j]
                 ):
-                    b = 5000  # big M
+                    b = 10000  # big M
                 else:
                     b = 0
                 model.addConstr(z[i, j, k] <= b, name=f"runway_{i}_{j}_{k}")
+
+# Constraint 9: slot constraint
+for i in cities:
+    if i == "Paris":
+        continue
+    model.addConstr(
+        quicksum(z[i, j, k] for j in cities for k in aircraft_types)
+        <= airport_available_slots[i],
+        name=f"slot_constraint_{i}",
+    )
+
+model.params.MIPGap = 0.0075  ##Not ideal but otherwise is takes very long to run
 
 model.update()
 
@@ -198,3 +230,71 @@ if model.status == GRB.OPTIMAL:
     for v in model.getVars():
         if v.x > 0:
             print(f"{v.varName}: {v.x}")
+
+    # --- Sum of all x[i,j] ---
+    sum_x = sum(v.x for v in model.getVars() if v.varName.startswith("x_"))
+    print("\nTotal direct passengers (sum of x):", sum_x)
+
+    # --- Sum of all w[i,j] ---
+    sum_w = sum(v.x for v in model.getVars() if v.varName.startswith("w_"))
+    print("Total transfer passengers (sum of w):", sum_w)
+
+    # --- Sum of all z[i,j,k] ---
+    sum_z = sum(v.x for v in model.getVars() if v.varName.startswith("z_"))
+    print("Total number of flights (sum of z):", sum_z)
+
+    # --- Number of each aircraft type leased ---
+    print("\nNumber of each aircraft type leased:")
+    for k in aircraft_types:
+        leased_count = sum(v.x for v in model.getVars() if v.varName == f"AC_{k}")
+        print(f"{k}: {leased_count}")
+
+print("\n--- Flights per purchased aircraft type ---")
+
+for k in aircraft_types:
+    total_flights_k = sum(z[i, j, k].x for i in cities for j in cities)
+    if AC[k].x > 0:
+        flights_per_aircraft = total_flights_k / AC[k].x
+        print(
+            f"{k}: {total_flights_k:.0f} flights total | "
+            f"{AC[k].x:.0f} aircraft | "
+            f"{flights_per_aircraft:.2f} flights per aircraft"
+        )
+
+# --- Visualization of the operated flight network ---
+
+# --- Extract coordinates into a clean dictionary ---
+coords = {city: (airport_lon[city], airport_lat[city]) for city in cities}  # (lon, lat)
+
+# --- Collect flown flights (total over all aircraft types) ---
+flight_lines = []
+for i in cities:
+    for j in cities:
+        total_flights_ij = sum(z[i, j, k].x for k in aircraft_types if z[i, j, k].x > 0)
+        if total_flights_ij > 0 and i != j:
+            lon_i, lat_i = coords[i]
+            lon_j, lat_j = coords[j]
+            flight_lines.append((lon_i, lat_i, lon_j, lat_j, total_flights_ij))
+
+# --- Plot ---
+plt.figure(figsize=(10, 10))
+
+# draw airports
+for city, (lon, lat) in coords.items():
+    plt.scatter(lon, lat, s=50, color="black")
+    plt.text(lon + 0.1, lat + 0.1, city, fontsize=9)
+
+# draw flight lines
+for lon_i, lat_i, lon_j, lat_j, freq in flight_lines:
+    plt.plot(
+        [lon_i, lon_j],
+        [lat_i, lat_j],
+        alpha=0.7,
+    )
+
+plt.title("Operated Flight Network")
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.grid(True)
+plt.savefig(BASE_DIR / "Estimated Data/operated_flight_network.png", dpi=300)
+plt.show()

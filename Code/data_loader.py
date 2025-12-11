@@ -116,39 +116,84 @@ def aircraft_data_loader():
     )
 
 
-# (
-#     speed_dict,
-#     seats_dict,
-#     TAT_dict,
-#     range_dict,
-#     runway_req_dict,
-#     weekly_lease_dict,
-#     fixed_cost_dict,
-#     time_cost_param_dict,
-#     fuel_cost_param_dict,
-# ) = aircraft_data_loader()
+#### Data for question 2 --------------------------------------------------------------
 
-# (
-#     cities,
-#     airport_code,
-#     airport_lat,
-#     airport_lon,
-#     airport_runway_length,
-#     airport_available_slots,
-# ) = airportdata_loader()
 
-# demand_2021_dict = demand2021_loader()
+def mix_flow_flights_loader():  ##index is flight number
+    filepath = BASE_DIR / "Problem 2 - Data/Problem 2 - Data/Group_2.xlsx"
+    flights_data = pd.read_excel(filepath, sheet_name="Flights", index_col=0)
+    flight_numbers = flights_data.index.tolist()
+    origin_dict = flights_data["Origin"].to_dict()
+    destination_dict = flights_data["Destination"].to_dict()
+    departure_time_dict = flights_data["Departure"].to_dict()
+    ready_time_dict = flights_data["Ready"].to_dict()
+    capacity_dict = flights_data["Capacity"].to_dict()
 
-# pop2021_dict, pop2024_dict, gdp2021_dict, gdp2024_dict = population_data_loader()
+    return (
+        flight_numbers,
+        origin_dict,
+        destination_dict,
+        departure_time_dict,
+        ready_time_dict,
+        capacity_dict,
+    )
 
-# print(f"This is an example of all data for city Barcelona: ")
-# print(f"Airport code: {airport_code['Barcelona']}")
-# print(f"Latitude: {airport_lat['Barcelona']}")
-# print(f"Longitude: {airport_lon['Barcelona']}")
-# print(f"Runway length: {airport_runway_length['Barcelona']}")
-# print(f"Available slots: {airport_available_slots['Barcelona']}")
-# print(f"Demand 2021: {demand_2021_dict[('Barcelona', 'Barcelona')]}")
-# print(f"Population 2021: {pop2021_dict['Barcelona']}")
-# print(f"Population 2024: {pop2024_dict['Barcelona']}")
-# print(f"GDP 2021: {gdp2021_dict['Barcelona']}")
-# print(f"GDP 2024: {gdp2024_dict['Barcelona']}")
+
+(
+    flight_numbers,
+    origin_dict,
+    destination_dict,
+    departure_time_dict,
+    ready_time_dict,
+    capacity_dict,
+) = mix_flow_flights_loader()
+
+
+def mix_flow_itineraries_loader():  ##index is itinerary number
+    filepath = BASE_DIR / "Problem 2 - Data/Problem 2 - Data/Group_2.xlsx"
+    itineraries_data = pd.read_excel(filepath, sheet_name="Itineraries", index_col=0)
+    itinerary = itineraries_data.index.tolist()
+    itinerary_origin_dict = itineraries_data["Origin"].to_dict()
+    itinerary_destination_dict = itineraries_data["Destination"].to_dict()
+    itinerary_flight_1_dict = itineraries_data["Flight 1"].to_dict()
+    itinerary_flight_2_dict = itineraries_data["Flight 2"].to_dict()
+    itinerary_price_dict = itineraries_data["Price [EUR]"].to_dict()
+    itinerary_demand_dict = itineraries_data["Demand"].to_dict()
+
+    return (
+        itinerary,
+        itinerary_origin_dict,
+        itinerary_destination_dict,
+        itinerary_flight_1_dict,
+        itinerary_flight_2_dict,
+        itinerary_price_dict,
+        itinerary_demand_dict,
+    )
+
+
+(
+    itinerary,
+    itinerary_origin_dict,
+    itinerary_destination_dict,
+    itinerary_flight_1_dict,
+    itinerary_flight_2_dict,
+    itinerary_price_dict,
+    itinerary_demand_dict,
+) = mix_flow_itineraries_loader()
+
+
+def mix_flow_recapture_loader():  ##Index with both 'from' and 'to' itenerary
+    filepath = BASE_DIR / "Problem 2 - Data/Problem 2 - Data/Group_2.xlsx"
+    recapture_data = pd.read_excel(filepath, sheet_name="Recapture")
+    recapture_from = recapture_data["From Itinerary"].to_dict()
+    recapture_to = recapture_data["To Itinerary"].to_dict()
+    recapture_dict = {
+        (row["From Itinerary"], row["To Itinerary"]): (row["Recapture Rate"])
+        for _, row in recapture_data.iterrows()
+    }
+
+    return recapture_from, recapture_to, recapture_dict
+
+
+# recapture_from, recapture_to, recapture_dict = mix_flow_recapture_loader()
+# print(recapture_dict[4, 14])
