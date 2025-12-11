@@ -26,9 +26,6 @@ from gurobipy import Model, Var, GRB, quicksum
 
 (recapture_from, recapture_to, recapture_dict) = mix_flow_recapture_loader()
 
-# path_indexes_with_recapture = {
-#     (recapture_from[i], recapture_to[i]) for i in recapture_from.keys()
-# }
 
 ## itenary_flights: dictionary mapping each path p to the list of flight legs in that path
 itinerary_flights = {
@@ -45,9 +42,6 @@ for p in itinerary:
 Q = {}
 for i in flight_numbers:
     Q[i] = sum(delta[i, p] * itinerary_demand_dict[p] for p in itinerary)
-
-
-print(recapture_dict[128, 140])
 
 
 model = Model("mix_flow_keypath")
@@ -92,12 +86,7 @@ for p in itinerary:
     )
 
 
-## Constraint 3: Non-negativity (already defined in variable creation)
-
-# model.params.MIPGap = 0
-
 model.update()
-
 
 model.optimize()
 
