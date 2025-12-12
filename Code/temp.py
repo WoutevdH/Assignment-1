@@ -3,7 +3,6 @@
 
 from data_loader import *
 import numpy as np
-import pickle
 from gurobipy import Model, Var, GRB, quicksum
 
 
@@ -53,15 +52,35 @@ print(len(delta))
 
 print(recapture_dict[8, 2])
 
-model = Model("passenger_mix_flow")
+#model = Model("passenger_mix_flow")
 
 ## Decision variables
 
 ## x_pr: number of passengers on path p that will travel on itinerary r
-x = {}
-for p in itinerary:
-    for r in itinerary:
-        x[p, r] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"x_{p}_{r}")
+# x = {}
+# for p in itinerary:
+#     for r in itinerary:
+#         x[p, r] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"x_{p}_{r}")
 
 ##print number of variables
-print(len(x))
+#print(len(x))
+
+
+
+## Creating new itneary dict which contains only the itineraries with recapture possibilities
+print(type(itinerary))
+
+itinerary_with_recapture = []
+for p in itinerary:
+    for r in itinerary:
+        if recapture_dict[p, r] == 0:
+            continue
+        else:
+            if p not in itinerary_with_recapture:
+                itinerary_with_recapture.append(p)
+            break
+
+#itinerary_with_recapture = list(set([p for p in itinerary for r in itinerary if recapture_dict[p, r] != 0]))
+
+print(itinerary_with_recapture)
+print(len(itinerary_with_recapture))

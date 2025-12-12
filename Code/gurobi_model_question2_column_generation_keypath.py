@@ -94,7 +94,6 @@ for p in itinerary:
 
 model.update()
 
-
 model.optimize()
 
 model.write("gurobi_model_keypath_RMP.lp")
@@ -127,53 +126,45 @@ if model.Status == GRB.OPTIMAL:
 
     for i in flight_numbers:
         dual_val = spill_constrs[i].Pi
-        if abs(dual_val) > 1e-6:
-            print(f"Constraint spill_{i}: dual = {dual_val}")
-            pi_dict[i] = dual_val
+        # if abs(dual_val) > 1e-6:
+        #     #print(f"Constraint spill_{i}: dual = {dual_val}")
+        #     pi_dict[i] = dual_val
+        pi_dict[i] = dual_val
 
     sigma_dict = {}
 
     print("\nDual variables for demand constraints:")
     for p in itinerary:
         dual_val = demand_constrs[p].Pi
-        if abs(dual_val) > 1e-6:
-            print(f"Constraint demand_{p}: dual = {dual_val}")
-            sigma_dict[p] = dual_val
+        # if abs(dual_val) > 1e-6:
+        #     #print(f"Constraint demand_{p}: dual = {dual_val}")
+        sigma_dict[p] = dual_val
 
-    print(pi_dict)
-    print(sigma_dict)
+    # print(pi_dict)
+    # print(sigma_dict)
+
+c = {}
+columns_to_add = []
+for p in itinerary:
+    for r in itinerary:
+        if recapture_dict[p, r] > 0:
+            c[p, r] = (
+                itinerary_price_dict[p]
+                - sum(pi_dict[i] * delta[i, p] for i in flight_numbers)
+            ) - (
+                recapture_dict[p, r]
+                * (
+                    itinerary_price_dict[r]
+                    - sum(pi_dict[j] * delta[j, r] for j in flight_numbers)
+                )) - sigma_dict[p]
+            if c[p, r] != 0 and c[p, r] < 0:
+                print(f"c[{p},{r}] = {c[p,r]}")
+                columns_to_add.append((p, r))
+
+#print(columns_to_add)
+
+## Second iteration: add columns with negative reduced cost
+    
 
 
 
-# if model.Status == GRB.OPTIMAL:
-#     print("\nOptimal t[p,r] values:")
-#     for p in itinerary:
-#         for r in itinerary:
-#             val = t[p, r].X
-#             if abs(val) > 1e-6:  # only show non-zero flows
-#                 print(f"t[{p},{r}] = {val}")
-
-#     ## print number of nonzero t[p,r] values
-#     nonzero_count = sum(
-#         1 for p in itinerary for r in itinerary if abs(t[p, r].X) > 1e-6
-#     )
-#     print(f"Number of nonzero t[p,r] values: {nonzero_count}")
-
-#     ## number of passengers spilled to an path with a recapture rate of 0
-#     spilled_no_recapture = sum(
-#         t[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] == 0
-#     )
-
-#     print(
-#         f"Number of passengers spilled to a path with a recapture rate of 0: {spilled_no_recapture}"
-#     )
-
-#     ## number of passengers spilled to an path with a recapture rate > 0
-#     spilled_with_recapture = sum(
-#         t[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0
-#     )
-#     print(
-#         f"Number of passengers spilled to a path with a recapture rate > 0: {spilled_with_recapture}"
-#     )
-
-#     print(f"\nOptimal objective value: {model.ObjVal}")
