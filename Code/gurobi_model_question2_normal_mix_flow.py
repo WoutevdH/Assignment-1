@@ -60,23 +60,10 @@ model.setObjective(objective, GRB.MAXIMIZE)
 model.update()
 
 ## Constraints
-##Constraint 1: Capacity constraints:
-for i in flight_numbers:
-    model.addConstr(
-        quicksum(delta[i, r] * (x[p, r]) for (p, r) in path_indexes_with_recapture)
-        <= capacity_dict[i],
-        name=f"capacity_{i}",
-    )
 
-## Constraint 2: Number of passengers is lower than demand
-for p in itinerary:
-    model.addConstr(
-        quicksum(x[p, r] for (pp, r) in path_indexes_with_recapture if pp == p)
-        <= itinerary_demand_dict[p],
-        name=f"demand_{p}",
-    )
 
-## Constraint 3: Non-negativity (already defined in variable creation)
+
+
 
 # model.params.MIPGap = 0
 

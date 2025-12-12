@@ -192,6 +192,12 @@ def mix_flow_recapture_loader():  ##Index with both 'from' and 'to' itenerary
         for _, row in recapture_data.iterrows()
     }
 
+    ##return 0 if no recapture rate is defined
+    for p in itinerary:
+        for r in itinerary:
+            if (p, r) not in recapture_dict:
+                recapture_dict[p, r] = 0
+
     return recapture_from, recapture_to, recapture_dict
 
 
