@@ -26,6 +26,11 @@ from gurobipy import Model, Var, GRB, quicksum
 
 (recapture_from, recapture_to, recapture_dict) = mix_flow_recapture_loader()
 
+for p in itinerary:
+    for r in itinerary:
+        if p == r:
+            recapture_dict[p, r] = 1.0
+
 
 ## itenary_flights: dictionary mapping each path p to the list of flight legs in that path
 itinerary_flights = {
@@ -41,12 +46,13 @@ for p in itinerary:
 ## Set P_p set of itineraries r that can recapture passengers from itinerary p
 itinerary_with_recapture = list(set([p for p in itinerary for r in itinerary if recapture_dict[p, r] != 0]))
 ## Same thing as above but in dictionary form
-P = {
-    p: [r for r in itinerary if recapture_dict[p, r] > 0]
-    for p in itinerary
-}
 
-print(P)
+# P = {
+#     p: [r for r in itinerary if recapture_dict[p, r] > 0]
+#     for p in itinerary
+# }
+
+#print(P)
 
 model = Model("normal_mix_flow")
 
@@ -77,7 +83,7 @@ for i in flight_numbers:
 # ## Constraint 2: Number of passengers is lower than demand
 for p in itinerary:
     model.addConstr(
-        quicksum(x[p, r] / recapture_dict[p, r] for r in P[p]) <= itinerary_demand_dict[p])
+        quicksum((x[p, r] / recapture_dict[p, r]) for r in itinerary if recapture_dict[p, r] > 0) <= itinerary_demand_dict[p])
 
 model.update()
 

@@ -161,7 +161,7 @@ for p in itinerary:
                 print(f"c[{p},{r}] = {c[p,r]}")
                 columns_to_add.append((p, r))
 
-#print(columns_to_add)
+print(columns_to_add)
 
 ## Second iteration: add columns with negative reduced cost
     
