@@ -1,6 +1,8 @@
-from data_loader import *
-from gurobipy import Model, Var, GRB, quicksum
+## This file houses the function which are used for the keypath model in the column generation approach
+
+from gurobipy import Model, GRB, quicksum
 from collections import defaultdict
+from data_loader import *
 
 
 (
@@ -29,20 +31,12 @@ itinerary_flights = {
     p: [itinerary_flight_1_dict[p], itinerary_flight_2_dict[p]] for p in itinerary
 }
 
-## Fictitious itinerary index 1000
-## Delta: 1 if flight leg i is in path p, 0 otherwise
-## Set delta to 0 for fictitious itinerary 1000
-
 delta = {}
 for p in itinerary:
     for i in flight_numbers:
         delta[i, p] = 1 if i in itinerary_flights[p] else 0
 
-for i in flight_numbers:
-    delta[i, 1000] = 0
-
-
-# berekening Q_i dus vraag per vlucht
+# berekening Q_i so demand per flight
 Q = {}
 for i in flight_numbers:
     Q[i] = sum(delta[i, p] * itinerary_demand_dict[p] for p in itinerary)
@@ -53,11 +47,18 @@ for p in itinerary:
         if p == r:
             recapture_dict[p, r] = 1.0
 
+## Set correct variables for fictitious itinerary 1000
+# recapture rate to fictitious itinerary is 1.0
 for p in itinerary:
     recapture_dict[p, 1000] = 1.0
 
+# fare for fictitious itinerary is 0
 itinerary_price_dict[1000] = 0.0
 
+
+# delta is 0 for fictitious itinerary
+for i in flight_numbers:
+    delta[i, 1000] = 0
 
 def run_model(columns_included):
 
@@ -98,15 +99,6 @@ def run_model(columns_included):
             quicksum(t[p, r] for r in r_list) <= itinerary_demand_dict[p],
             name=f"demand_{p}",
         )
-
-    # for p, r in columns_included:
-    #     if r == 1000:
-    #         continue
-    #     model.addConstr(
-    #         quicksum(t[p, r] for r in itinerary if (p, r) in columns_included)
-    #         <= itinerary_demand_dict[p],
-    #         name=f"demand_{p}",
-    #     )
 
     model.optimize()
 
@@ -160,53 +152,3 @@ def pricing_problem(duals_capacity_pi, duals_demand_sigma):
                         slack_columns_to_add[p, r] = reduced_cost
 
     return slack_columns, slack_columns_to_add
-
-
-### First iteration
-## Restricted columns
-
-
-start_columns = []
-for p in itinerary:
-    start_columns.append((p, p))
-    start_columns.append((p, 1000))
-
-model = run_model(start_columns)
-duals_capacity_pi, duals_demand_sigma = get_dual_values(model)
-slack_columns, slack_columns_to_add = pricing_problem(
-    duals_capacity_pi, duals_demand_sigma
-)
-
-
-
-
-iterations = 0
-all_columns = list(start_columns)
-
-while True:
-    iterations += 1
-    print(f"Iteration {iterations}:")
-
-    if iterations == 10:
-        print("Reached maximum number of iterations (10). Terminating.")
-        break
-
-    if not slack_columns_to_add:
-        print("No more columns to add. Terminating.")
-        break
-
-    new_columns = list(slack_columns_to_add.keys())
-    all_columns = all_columns + new_columns
-
-    model = run_model(all_columns)
-    duals_capacity_pi, duals_demand_sigma = get_dual_values(model)
-    slack_columns, slack_columns_to_add = pricing_problem(
-        duals_capacity_pi, duals_demand_sigma
-    )
-
-    if model.Status == GRB.OPTIMAL:
-        print(f"\nOptimal objective value after adding columns: {model.ObjVal}")
-
-        print("\nColumns with negative reduced cost to add:")
-        for (p, r), slack in slack_columns_to_add.items():
-            print(f"Column ({p}, {r}): slack = {slack}")
