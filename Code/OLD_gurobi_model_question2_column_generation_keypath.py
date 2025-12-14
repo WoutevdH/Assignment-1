@@ -1,3 +1,7 @@
+##################################################################################################################
+# THIS MODEL IS JUST THE FIRST ITERATION OF THE COLUMN GENERATION PROCEDURE
+
+
 from pathlib import Path
 import numpy as np
 from data_loader import *

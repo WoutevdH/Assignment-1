@@ -3,6 +3,10 @@ import numpy as np
 from data_loader import *
 import pickle
 from gurobipy import Model, Var, GRB, quicksum
+import time
+
+start_time = time.time()
+
 
 
 (
@@ -138,3 +142,6 @@ if model.Status == GRB.OPTIMAL:
     )
 
     print(f"\nOptimal objective value: {model.ObjVal}")
+    
+end_time = time.time()
+print(f"Total time taken: {end_time - start_time} seconds")

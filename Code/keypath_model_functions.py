@@ -60,9 +60,12 @@ itinerary_price_dict[1000] = 0.0
 for i in flight_numbers:
     delta[i, 1000] = 0
 
-def run_model(columns_included):
+
+def run_model(columns_included, gurobi_output=True):
 
     model = Model("restricted_master_problem")
+
+    model.setParam("OutputFlag", 1 if gurobi_output else 0)
 
     t = {}
     for p, r in columns_included:
@@ -102,7 +105,22 @@ def run_model(columns_included):
 
     model.optimize()
 
-    return model
+    ## multiple recapture rate with t to get x
+    x = {}
+    for p, r in columns_included:
+        if p == r:
+            x[p, r] = itinerary_demand_dict[p] - sum(
+                t[p, r_prime].X
+                for p_temp, r_prime in columns_included
+                if p_temp == p and r_prime != p
+            )
+        if p != r:
+            x[p, r] = recapture_dict[p, r] * t[p, r].X
+            # print non zero x[p,r] values
+            # if abs(x[p, r]) > 1e-6:
+            #     print(f"x[{p},{r}] = {x[p, r]}")
+
+    return model, x
 
 
 def get_dual_values(model):
@@ -120,7 +138,7 @@ def get_dual_values(model):
     return duals_capacity_pi, duals_demand_sigma
 
 
-def pricing_problem(duals_capacity_pi, duals_demand_sigma):
+def pricing_problem(duals_capacity_pi, duals_demand_sigma, sensitivity=-1e-5):
     slack_columns = {}
     slack_columns_to_add = {}
 
@@ -148,7 +166,7 @@ def pricing_problem(duals_capacity_pi, duals_demand_sigma):
                 )
                 if reduced_cost != 0:
                     slack_columns[p, r] = reduced_cost
-                    if reduced_cost < -0.001:
+                    if reduced_cost < sensitivity:
                         slack_columns_to_add[p, r] = reduced_cost
 
     return slack_columns, slack_columns_to_add
