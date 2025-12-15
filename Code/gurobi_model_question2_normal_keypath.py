@@ -3,6 +3,10 @@ import numpy as np
 from data_loader import *
 import pickle
 from gurobipy import Model, Var, GRB, quicksum
+import time
+
+start_time = time.time()
+
 
 
 (
@@ -48,9 +52,9 @@ model = Model("mix_flow_keypath")
 
 ## Decision variables
 t = {}
-for r in itinerary:
-    for p in itinerary:
-        t[r, p] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"t_{r}_{p}")
+for p in itinerary:
+    for r in itinerary:
+        t[p, r] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"t_{p}_{r}")
 
 # Objective: minimize loss revenue for spillage
 objective = quicksum(
@@ -115,6 +119,20 @@ if model.Status == GRB.OPTIMAL:
         f"Number of passengers spilled to a path with a recapture rate of 0: {spilled_no_recapture}"
     )
 
+    ## multiple recapture rate with t to get x
+    x = {}
+    for p in itinerary:
+        for r in itinerary:
+            if p == r:
+                x[p, r] = itinerary_demand_dict[p] - sum(t[p, r].X for r in itinerary if r != p)
+            if p != r:
+                x[p, r] = recapture_dict[p, r] * t[p, r].X
+            #print non zero x[p,r] values
+            if abs(x[p, r]) > 1e-6:
+                print(f"x[{p},{r}] = {x[p, r]}")
+    
+    #print(x)
+
     ## number of passengers spilled to an path with a recapture rate > 0
     spilled_with_recapture = sum(
         t[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0
@@ -124,3 +142,6 @@ if model.Status == GRB.OPTIMAL:
     )
 
     print(f"\nOptimal objective value: {model.ObjVal}")
+    
+end_time = time.time()
+print(f"Total time taken: {end_time - start_time} seconds")

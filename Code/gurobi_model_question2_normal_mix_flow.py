@@ -26,6 +26,11 @@ from gurobipy import Model, Var, GRB, quicksum
 
 (recapture_from, recapture_to, recapture_dict) = mix_flow_recapture_loader()
 
+for p in itinerary:
+    for r in itinerary:
+        if p == r:
+            recapture_dict[p, r] = 1.0
+
 
 ## itenary_flights: dictionary mapping each path p to the list of flight legs in that path
 itinerary_flights = {
@@ -34,18 +39,29 @@ itinerary_flights = {
 
 ## Delta: 1 if flight leg i is in path p, 0 otherwise
 delta = {}
-for r in itinerary:
+for p in itinerary:
     for i in flight_numbers:
-        delta[i, r] = 1 if i in itinerary_flights[r] else 0
- 
+        delta[i, p] = 1 if i in itinerary_flights[p] else 0
+
+## Set P_p set of itineraries r that can recapture passengers from itinerary p
+itinerary_with_recapture = list(set([p for p in itinerary for r in itinerary if recapture_dict[p, r] != 0]))
+## Same thing as above but in dictionary form
+
+# P = {
+#     p: [r for r in itinerary if recapture_dict[p, r] > 0]
+#     for p in itinerary
+# }
+
+#print(P)
 
 model = Model("normal_mix_flow")
 
 ## Decision variables
 x = {}
-for r in itinerary:
-    for p in itinerary:
-        x[p, r] = model.addVar(vtype=GRB.INTEGER, lb=0, name=f"x_{r}_{p}")
+for p in itinerary:
+    for r in itinerary:
+        x[p, r] = model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=f"x_{p}_{r}")
+
 
 # Objective: maximum revenue for carrying all passengers
 objective = quicksum(itinerary_price_dict[r] * x[p, r] 
@@ -67,7 +83,7 @@ for i in flight_numbers:
 # ## Constraint 2: Number of passengers is lower than demand
 for p in itinerary:
     model.addConstr(
-        quicksum(x[p, r] / recapture_dict[p, r] for r in itinerary) <= itinerary_demand_dict[p])
+        quicksum((x[p, r] / recapture_dict[p, r]) for r in itinerary if recapture_dict[p, r] > 0) <= itinerary_demand_dict[p])
 
 model.update()
 
@@ -91,35 +107,3 @@ if model.Status == GRB.OPTIMAL:
 
     print(f"\nOptimal objective value: {model.ObjVal}")
 
-# if model.Status == GRB.OPTIMAL:
-#     print("\nOptimal t[p,r] values:")
-#     for p in itinerary:
-#         for r in itinerary:
-#             val = t[p, r].X
-#             if abs(val) > 1e-6:  # only show non-zero flows
-#                 print(f"t[{p},{r}] = {val}")
-
-#     ## print number of nonzero t[p,r] values
-#     nonzero_count = sum(
-#         1 for p in itinerary for r in itinerary if abs(t[p, r].X) > 1e-6
-#     )
-#     print(f"Number of nonzero t[p,r] values: {nonzero_count}")
-
-#     ## number of passengers spilled to an path with a recapture rate of 0
-#     spilled_no_recapture = sum(
-#         t[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] == 0
-#     )
-
-#     print(
-#         f"Number of passengers spilled to a path with a recapture rate of 0: {spilled_no_recapture}"
-#     )
-
-#     ## number of passengers spilled to an path with a recapture rate > 0
-#     spilled_with_recapture = sum(
-#         t[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0
-#     )
-#     print(
-#         f"Number of passengers spilled to a path with a recapture rate > 0: {spilled_with_recapture}"
-#     )
-
-#     print(f"\nOptimal objective value: {model.ObjVal}")
