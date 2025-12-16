@@ -3,6 +3,9 @@ import numpy as np
 from data_loader import *
 import pickle
 from gurobipy import Model, Var, GRB, quicksum
+import time
+
+start_time = time.time()
 
 
 (
@@ -42,12 +45,6 @@ for p in itinerary:
 itinerary_with_recapture = list(set([p for p in itinerary for r in itinerary if recapture_dict[p, r] != 0]))
 ## Same thing as above but in dictionary form
 
-# P = {
-#     p: [r for r in itinerary if recapture_dict[p, r] > 0]
-#     for p in itinerary
-# }
-
-#print(P)
 
 model = Model("normal_mix_flow")
 
@@ -106,4 +103,9 @@ if model.Status == GRB.OPTIMAL:
     print(f'Number of passengers spilled to a different itinerary: {sum(x[p, r].X for p in itinerary for r in itinerary if p != r)}')
 
     print(f"\nOptimal objective value: {model.ObjVal}")
+
+end_time = time.time()
+runtime = end_time - start_time
+
+print(f"Runtime of the model: {runtime} seconds")
 

@@ -53,7 +53,8 @@ while True:
         print(f"Final decision variables:")
         for v in model.getVars():
             if v.X > 1e-6:
-                print(f"{v.VarName}: {v.X}")
+                ...
+                #print(f"{v.VarName}: {v.X}")
 
         # print non zero x[p,r] values
         #print(f"\nFinal x[p,r] values:")
@@ -62,18 +63,27 @@ while True:
                 ...
                 # print(f"x[{p},{r}] = {val}")
 
+        ## passengers_spilled to fictitious itinerary 1000
+        passengers_spilled_fictitious = sum(v.X for v in model.getVars() if "_1000" in v.VarName)
+
+        ## passengers_spilled to real itineraries
+        passengers_spilled_real = sum((x[p,r] for (p,r) in x if r != 1000 and p != r))
+
+        ## passengers on preferred itineraries
+        passengers_preferred = sum(x[p,r] for (p,r) in x if p == r and r != 1000)
+
         print(
-            f'Number of passengers spilled to fictitious itinerary: {sum(v.X for v in model.getVars() if "_1000" in v.VarName)}'
+            f'Number of passengers spilled to fictitious itinerary: {passengers_spilled_fictitious}'
         )
         print(
-            f'Number of spilled to on real itineraries: {sum(v.X for v in model.getVars() if "_1000" not in v.VarName)}'
+            f'Number of spilled to on real itineraries: {passengers_spilled_real}'
         )
         print(
-            f"Number transportred on to real itineraries: {sum(x[p,r] for (p,r) in x if r != 1000)}"
+            f"Number transportred on to real itineraries: {passengers_preferred+passengers_spilled_real}"
         )
 
-        print(f'Number of passengers transported on preferred itineraries: {sum(x[p,r] for (p,r) in x if p == r and r != 1000)}')
-        print(f"Sum of all passengers accounted for: {sum(x[p,r] for (p,r) in x)}")
+        print(f'Number of passengers transported on preferred itineraries: {passengers_preferred}')
+        print(f"Sum of all passengers accounted for: {passengers_spilled_fictitious + passengers_spilled_real + passengers_preferred}")
 
         break
 
