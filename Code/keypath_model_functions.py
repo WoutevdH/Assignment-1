@@ -41,12 +41,6 @@ Q = {}
 for i in flight_numbers:
     Q[i] = sum(delta[i, p] * itinerary_demand_dict[p] for p in itinerary)
 
-## Set recapture_dict[p, r] = 1.0 if p == r
-for p in itinerary:
-    for r in itinerary:
-        if p == r:
-            recapture_dict[p, r] = 1.0
-
 ## Set correct variables for fictitious itinerary 1000
 # recapture rate to fictitious itinerary is 1.0
 for p in itinerary:
