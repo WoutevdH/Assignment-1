@@ -26,11 +26,6 @@ from gurobipy import Model, Var, GRB, quicksum
 
 (recapture_from, recapture_to, recapture_dict) = mix_flow_recapture_loader()
 
-for p in itinerary:
-    for r in itinerary:
-        if p == r:
-            recapture_dict[p, r] = 1.0
-
 
 ## itenary_flights: dictionary mapping each path p to the list of flight legs in that path
 itinerary_flights = {
@@ -85,6 +80,7 @@ for p in itinerary:
     model.addConstr(
         quicksum((x[p, r] / recapture_dict[p, r]) for r in itinerary if recapture_dict[p, r] > 0) <= itinerary_demand_dict[p])
 
+
 model.update()
 
 model.optimize()
@@ -104,6 +100,10 @@ if model.Status == GRB.OPTIMAL:
         1 for p in itinerary for r in itinerary if abs(x[p, r].X) > 1e-6
     )
     print(f"Number of nonzero x[p,r] values: {nonzero_count}")
+
+    print(f'Number of passengers travelling on preferred itineraries: {sum(x[p, p].X for p in itinerary)}')
+
+    print(f'Number of passengers spilled to a different itinerary: {sum(x[p, r].X for p in itinerary for r in itinerary if p != r)}')
 
     print(f"\nOptimal objective value: {model.ObjVal}")
 

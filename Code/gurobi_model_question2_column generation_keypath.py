@@ -56,7 +56,7 @@ while True:
                 print(f"{v.VarName}: {v.X}")
 
         # print non zero x[p,r] values
-        print(f"\nFinal x[p,r] values:")
+        #print(f"\nFinal x[p,r] values:")
         for (p, r), val in x.items():
             if abs(val) > 1e-6:
                 ...

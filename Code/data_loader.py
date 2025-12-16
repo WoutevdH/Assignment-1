@@ -195,11 +195,11 @@ def mix_flow_recapture_loader():  ##Index with both 'from' and 'to' itenerary
     ##return 0 if no recapture rate is defined
     for p in itinerary:
         for r in itinerary:
+            if p == r:
+                recapture_dict[p, r] = 1.0
             if (p, r) not in recapture_dict:
                 recapture_dict[p, r] = 0
 
     return recapture_from, recapture_to, recapture_dict
 
 
-# recapture_from, recapture_to, recapture_dict = mix_flow_recapture_loader()
-# print(recapture_dict[4, 14])
