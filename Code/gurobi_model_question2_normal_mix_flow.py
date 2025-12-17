@@ -76,6 +76,12 @@ for i in flight_numbers:
 for p in itinerary:
     model.addConstr(
         quicksum((x[p, r] / recapture_dict[p, r]) for r in itinerary if recapture_dict[p, r] > 0) <= itinerary_demand_dict[p])
+    
+## Constraint 3: passengers can only be recaptured to itenaries that are allowed
+for p in itinerary:
+    for r in itinerary:
+        if recapture_dict[p, r] == 0:
+            model.addConstr(x[p, r] == 0, name=f"no_recapture_{p}_{r}")
 
 
 model.update()
@@ -96,13 +102,19 @@ if model.Status == GRB.OPTIMAL:
     nonzero_count = sum(
         1 for p in itinerary for r in itinerary if abs(x[p, r].X) > 1e-6
     )
-    print(f"Number of nonzero x[p,r] values: {nonzero_count}")
+    
+    print(f'The optimal objective value is: {model.ObjVal}')
+
+    print(f'Number of passengers not transported at all (spilled to fictious itinerary): {sum(itinerary_demand_dict[p] for p in itinerary) - sum(x[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0)}')
+
+    print(f'Number of passengers spilled to real itineraries: {sum(x[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0 and p != r)}')
+
+    print(f'Number of passengers transported on real itineraries: {sum(x[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0)}')
 
     print(f'Number of passengers travelling on preferred itineraries: {sum(x[p, p].X for p in itinerary)}')
 
-    print(f'Number of passengers spilled to a different itinerary: {sum(x[p, r].X for p in itinerary for r in itinerary if p != r)}')
+    print(f'Number of passsengers accounted for: {sum(itinerary_demand_dict[p] for p in itinerary)}')
 
-    print(f"\nOptimal objective value: {model.ObjVal}")
 
 end_time = time.time()
 runtime = end_time - start_time

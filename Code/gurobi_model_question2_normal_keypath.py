@@ -141,17 +141,16 @@ if model.Status == GRB.OPTIMAL:
 
     print(f"\nOptimal objective value: {model.ObjVal}")
 
-    print(f'The number of passengers spilled to a itinerary with recapture rate of 0: {spilled_no_recapture}')
+    print(f'The number of passengers spilled to a fictitious itinerary: {spilled_no_recapture}')
 
-    print(
-            f'Number of spilled to on real itineraries: {spilled_with_recapture}'
-        )
-    print(
-            f"Number transportred on to real itineraries: {sum(x[p,r] for (p,r) in x if recapture_dict[p, r] != 0)}"
-        )
+    print(f'Number of passengers spilled to on real itineraries: {spilled_with_recapture}')
+
+    print(f"Number transportred on to real itineraries: {sum(x[p,r] for (p,r) in x if recapture_dict[p, r] != 0)}")
 
     print(f'Number of passengers transported on preferred itineraries: {sum(x[p,r] for (p,r) in x if p == r)}')
+
     print(f"Sum of all passengers accounted for: {spilled_with_recapture + spilled_no_recapture + sum(x[p,r] for (p,r) in x if p==r)}")
+
     
 end_time = time.time()
 print(f"Total time taken: {end_time - start_time} seconds")
