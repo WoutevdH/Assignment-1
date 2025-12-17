@@ -50,7 +50,7 @@ while True:
     if not slack_columns_to_add:
         print("No more columns to add, final number of iterations:", iterations)
         print(f"Final objective value: {model.ObjVal}")
-        print(f"Final decision variables:")
+        #print(f"Final decision variables:")
         for v in model.getVars():
             if v.X > 1e-6:
                 ...
@@ -61,7 +61,7 @@ while True:
         for (p, r), val in x.items():
             if abs(val) > 1e-6:
                 ...
-                # print(f"x[{p},{r}] = {val}")
+                #print(f"x[{p},{r}] = {val}")
 
         ## passengers_spilled to fictitious itinerary 1000
         passengers_spilled_fictitious = sum(v.X for v in model.getVars() if "_1000" in v.VarName)
