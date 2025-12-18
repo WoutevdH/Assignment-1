@@ -1,7 +1,5 @@
 ## This file calculates the yield for each OD pair based on the distance
 from data_loader import *
-from Distance_calculator import calculate_distance
-import numpy as np
 import pickle
 from pathlib import Path
 

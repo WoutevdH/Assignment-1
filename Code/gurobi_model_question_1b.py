@@ -152,26 +152,13 @@ for i in cities:
             name=f"aircraft_continuity_{i}_{k}",
         )
 
-# # Constraint 6: aircraft utilization constraint
-# for k in aircraft_types:
-#     model.addConstr(
-#         quicksum(
-#             ((distance_dict[i, j] / speed_dict[k]) + (TAT_dict[k] / 60)) * z[i, j, k]
-#             for i in cities
-#             for j in cities
-#         )
-#         <= BT * AC[k],
-#         name=f"aircraft_utilization_{k}",
-# )
-
 # Constraint 6: aircraft utilization constraint
-# Add adjustment for TAT when the flight is to the hub
 for k in aircraft_types:
     model.addConstr(
         quicksum(
             (
                 (distance_dict[i, j] / speed_dict[k])
-                + ((TAT_dict[k] * (1.5 if j == "Paris" else 1)) / 60)
+                + ((TAT_dict[k] * (1.5 if j == "Paris" else 1)) / 60) # Add adjustment for TAT when the flight is to the hub
             )
             * z[i, j, k]
             for i in cities
@@ -217,13 +204,13 @@ for i in cities:
         name=f"slot_constraint_{i}",
     )
 
-model.params.MIPGap = 0.0075  ##Not ideal but otherwise is takes very long to run
+model.params.MIPGap = 0.0075  ## Set MIP gap to 0.75% to prevent extremely long solve times
 
 model.update()
 
 model.optimize()
 
-model.write("network_fleet_development.lp")
+model.write(str(BASE_DIR / "LP files/network_fleet_development.lp"))
 
 if model.status == GRB.OPTIMAL:
     print("Optimal objective value:", model.objVal)
@@ -263,7 +250,7 @@ for k in aircraft_types:
 
 # --- Visualization of the operated flight network ---
 
-# --- Extract coordinates into a clean dictionary ---
+# --- Extract coordinates into a dictionary ---
 coords = {city: (airport_lon[city], airport_lat[city]) for city in cities}  # (lon, lat)
 
 # --- Collect flown flights (total over all aircraft types) ---

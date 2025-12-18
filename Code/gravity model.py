@@ -5,7 +5,6 @@ import pandas as pd
 from data_loader import *
 from Distance_calculator import calculate_distance
 
-
 ## Import airport data
 (
     cities,
@@ -21,7 +20,6 @@ demand_2021_dict = demand2021_loader()
 
 ## Import population and gdp data
 pop_2021_dict, pop_2024_dict, gdp_2021_dict, gdp_2024_dict = population_data_loader()
-
 
 def estimate_gravity_model(
     popdata, gdpdata, demand_data, airports_lat, airports_lon, f=1.42
@@ -84,7 +82,6 @@ def estimate_gravity_model(
     print(f"b3 = {b3}")
 
     return k, b1, b2, b3
-
 
 estimate_gravity_model(
     pop_2021_dict, gdp_2021_dict, demand_2021_dict, airport_lat, airport_lon

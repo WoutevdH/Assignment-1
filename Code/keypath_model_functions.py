@@ -4,7 +4,6 @@ from gurobipy import Model, GRB, quicksum
 from collections import defaultdict
 from data_loader import *
 
-
 (
     flight_numbers,
     origin_dict,
