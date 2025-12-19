@@ -1,16 +1,11 @@
-##Distance calculator
-
+## This file houses the functions to calculate distances between airports based on their latitude and longitude and saves the distance dictionary as a pickle file
 import numpy as np
 import pandas as pd
 from data_loader import airportdata_loader
 import pickle
 from pathlib import Path
 
-
 BASE_DIR = Path(__file__).resolve().parent
-
-# from gurobipy import Model, GRB, Var, quicksum
-
 
 def calculate_distance(
     lat_i,
@@ -18,7 +13,7 @@ def calculate_distance(
     lon_i,
     lon_j,
     Re=6371,
-):
+) -> float:
     R = Re  # Radius of the Earth in kilometers
     lat_i_rad = np.radians(lat_i)
     lat_j_rad = np.radians(lat_j)
@@ -46,7 +41,7 @@ def calculate_distance(
 ) = airportdata_loader()
 
 
-def calculate_all_distances(cities, airport_lat, airport_lon):
+def calculate_all_distances(cities, airport_lat, airport_lon) -> dict:
     distance_dict = {}
     for i in cities:
         for j in cities:

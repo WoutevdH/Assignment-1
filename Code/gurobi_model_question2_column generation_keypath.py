@@ -4,8 +4,10 @@ from collections import defaultdict
 from keypath_model_functions import run_model, get_dual_values, pricing_problem
 import time
 
-## === iterated column generation process === ##
+
 start_time = time.time()
+
+## === iterated column generation process === ##
 
 
 # Set up variables to record progress over iterations
@@ -15,7 +17,7 @@ number_of_columns = []
 
 
 ### First iteration
-## Restricted columns to include: all (p, p) and (p, 1000)
+## Restricted columns to include: all (p, p) and (p, 1000) (1000 is fictitious itinerary)
 start_columns = []
 for p in itinerary:
     start_columns.append((p, p))
@@ -56,7 +58,6 @@ while True:
                 ...
                 #print(f"{v.VarName}: {v.X}")
 
-        # print non zero x[p,r] values
         #print(f"\nFinal x[p,r] values:")
         for (p, r), val in x.items():
             if abs(val) > 1e-6:
@@ -83,7 +84,6 @@ while True:
         )
 
         print(f'Number of passengers transported on preferred itineraries: {passengers_preferred}')
-        print(f"Sum of all passengers accounted for: {passengers_spilled_fictitious + passengers_spilled_real + passengers_preferred}")
 
         break
 

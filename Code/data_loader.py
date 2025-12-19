@@ -1,15 +1,11 @@
-##This file loads all data provided from the excel files
-
+##This file loads all data provided from the excel files for all problems
 
 import pandas as pd
 from pathlib import Path
 
-
 BASE_DIR = Path(__file__).resolve().parent
 
 ##Everything is linked to the name of the cities, not the airport codes.
-
-
 ## Import all airport data and return multiple dictionaries
 def airportdata_loader():
     filepath = BASE_DIR / "Problem 1 - Data/Problem 1 - Data/DemandGroup2.xlsx"
@@ -118,8 +114,8 @@ def aircraft_data_loader():
 
 #### Data for question 2 --------------------------------------------------------------
 
-
-def mix_flow_flights_loader():  ##index is flight number
+##index is flight number
+def mix_flow_flights_loader():  
     filepath = BASE_DIR / "Problem 2 - Data/Problem 2 - Data/Group_2.xlsx"
     flights_data = pd.read_excel(filepath, sheet_name="Flights", index_col=0)
     flight_numbers = flights_data.index.tolist()
@@ -148,8 +144,8 @@ def mix_flow_flights_loader():  ##index is flight number
     capacity_dict,
 ) = mix_flow_flights_loader()
 
-
-def mix_flow_itineraries_loader():  ##index is itinerary number
+##index is itinerary number
+def mix_flow_itineraries_loader():  
     filepath = BASE_DIR / "Problem 2 - Data/Problem 2 - Data/Group_2.xlsx"
     itineraries_data = pd.read_excel(filepath, sheet_name="Itineraries", index_col=0)
     itinerary = itineraries_data.index.tolist()
@@ -181,8 +177,8 @@ def mix_flow_itineraries_loader():  ##index is itinerary number
     itinerary_demand_dict,
 ) = mix_flow_itineraries_loader()
 
-
-def mix_flow_recapture_loader():  ##Index with both 'from' and 'to' itenerary
+##Index with both 'from' and 'to' itenerary
+def mix_flow_recapture_loader():  
     filepath = BASE_DIR / "Problem 2 - Data/Problem 2 - Data/Group_2.xlsx"
     recapture_data = pd.read_excel(filepath, sheet_name="Recapture")
     recapture_from = recapture_data["From Itinerary"].to_dict()
@@ -192,7 +188,7 @@ def mix_flow_recapture_loader():  ##Index with both 'from' and 'to' itenerary
         for _, row in recapture_data.iterrows()
     }
 
-    ##return 0 if no recapture rate is defined
+    ##return 0 if no recapture rate is defined and 1 if p==r
     for p in itinerary:
         for r in itinerary:
             if p == r:

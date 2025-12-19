@@ -1,13 +1,11 @@
 from pathlib import Path
-import numpy as np
 from data_loader import *
-import pickle
 from gurobipy import Model, Var, GRB, quicksum
 import time
 
 start_time = time.time()
 
-
+BASE_DIR = Path(__file__).resolve().parent
 
 (
     flight_numbers,
@@ -42,7 +40,7 @@ for p in itinerary:
     for i in flight_numbers:
         delta[i, p] = 1 if i in itinerary_flights[p] else 0
 
-# berekening Q_i dus vraag per vlucht
+# berekening Q_i so demand per flight
 Q = {}
 for i in flight_numbers:
     Q[i] = sum(delta[i, p] * itinerary_demand_dict[p] for p in itinerary)
@@ -94,29 +92,25 @@ model.update()
 
 model.optimize()
 
-model.write("gurobi_model_question2b_keypath.lp")
+model.write(str(BASE_DIR / "LP files/gurobi_model_question2_normal_keypath.lp"))
 
 if model.Status == GRB.OPTIMAL:
-    print("\nOptimal t[p,r] values:")
+    #print("\nOptimal t[p,r] values:")
     for p in itinerary:
         for r in itinerary:
             val = t[p, r].X
             if abs(val) > 1e-6:  # only show non-zero flows
-                print(f"t[{p},{r}] = {val}")
+                ...
+                #print(f"t[{p},{r}] = {val}")
 
     ## print number of nonzero t[p,r] values
     nonzero_count = sum(
         1 for p in itinerary for r in itinerary if abs(t[p, r].X) > 1e-6
     )
-    print(f"Number of nonzero t[p,r] values: {nonzero_count}")
 
     ## number of passengers spilled to an path with a recapture rate of 0
     spilled_no_recapture = sum(
         t[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] == 0
-    )
-
-    print(
-        f"Number of passengers spilled to a path with a recapture rate of 0: {spilled_no_recapture}"
     )
 
     ## multiple recapture rate with t to get x
@@ -129,15 +123,13 @@ if model.Status == GRB.OPTIMAL:
                 x[p, r] = recapture_dict[p, r] * t[p, r].X
             #print non zero x[p,r] values
             if abs(x[p, r]) > 1e-6:
-                print(f"x[{p},{r}] = {x[p, r]}")
+                ...
+                #print(f"x[{p},{r}] = {x[p, r]}")
     
-    #print(x)
-
     ## number of passengers spilled to an path with a recapture rate > 0
     spilled_with_recapture = sum(
-        t[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0
+        x[p, r] for p in itinerary for r in itinerary if recapture_dict[p, r] > 0 and p != r
     )
-
 
     print(f"\nOptimal objective value: {model.ObjVal}")
 
@@ -149,8 +141,5 @@ if model.Status == GRB.OPTIMAL:
 
     print(f'Number of passengers transported on preferred itineraries: {sum(x[p,r] for (p,r) in x if p == r)}')
 
-    print(f"Sum of all passengers accounted for: {spilled_with_recapture + spilled_no_recapture + sum(x[p,r] for (p,r) in x if p==r)}")
-
-    
 end_time = time.time()
 print(f"Total time taken: {end_time - start_time} seconds")

@@ -7,6 +7,7 @@ import time
 
 start_time = time.time()
 
+BASE_DIR = Path(__file__).resolve().parent
 
 (
     flight_numbers,
@@ -54,7 +55,6 @@ for p in itinerary:
     for r in itinerary:
         x[p, r] = model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=f"x_{p}_{r}")
 
-
 # Objective: maximum revenue for carrying all passengers
 objective = quicksum(itinerary_price_dict[r] * x[p, r] 
        for p in itinerary 
@@ -83,20 +83,20 @@ for p in itinerary:
         if recapture_dict[p, r] == 0:
             model.addConstr(x[p, r] == 0, name=f"no_recapture_{p}_{r}")
 
-
 model.update()
 
 model.optimize()
 
-model.write("gurobi_model_question2_normal_mix_flow.lp")
+model.write(str(BASE_DIR / "LP files/gurobi_model_question2_normal_mix_flow.lp"))
 
 if model.Status == GRB.OPTIMAL:
-    print("\nOptimal x[p,r] values:")
+    #print("\nOptimal x[p,r] values:")
     for p in itinerary:
         for r in itinerary:
             val = x[p, r].X
             if abs(val) > 1e-6:  # only show non-zero flows
-                print(f"x[{p},{r}] = {val}")
+                ...
+                #print(f"x[{p},{r}] = {val}")
 
     ## print number of nonzero x[p,r] values
     nonzero_count = sum(
@@ -112,8 +112,6 @@ if model.Status == GRB.OPTIMAL:
     print(f'Number of passengers transported on real itineraries: {sum(x[p, r].X for p in itinerary for r in itinerary if recapture_dict[p, r] > 0)}')
 
     print(f'Number of passengers travelling on preferred itineraries: {sum(x[p, p].X for p in itinerary)}')
-
-    print(f'Number of passsengers accounted for: {sum(itinerary_demand_dict[p] for p in itinerary)}')
 
 
 end_time = time.time()
