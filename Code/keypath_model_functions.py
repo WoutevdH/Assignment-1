@@ -1,3 +1,8 @@
+## Group 2:
+## Ivo Aben                 5099471
+## Martijn Damman           5412633
+## Wouter van der Hoorn     5370566
+
 ## This file houses the function which are used for the keypath model in the column generation approach
 
 from gurobipy import Model, GRB, quicksum

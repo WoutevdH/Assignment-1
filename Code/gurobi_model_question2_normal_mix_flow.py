@@ -1,3 +1,11 @@
+## Group 2:
+## Ivo Aben                 5099471
+## Martijn Damman           5412633
+## Wouter van der Hoorn     5370566
+
+## This file contains the Gurobi model for question 2 of the assignment, implementing the normal mix flow model.
+
+
 from pathlib import Path
 import numpy as np
 from data_loader import *

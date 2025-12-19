@@ -1,3 +1,8 @@
+## Group 2:
+## Ivo Aben                 5099471
+## Martijn Damman           5412633
+## Wouter van der Hoorn     5370566
+
 ##This file estimates the 2026 growth for gdp and population and then uses the gravity model to estimate 2026 demand
 
 from data_loader import *

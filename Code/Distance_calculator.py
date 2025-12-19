@@ -1,3 +1,10 @@
+## Group 2:
+## Ivo Aben                 5099471
+## Martijn Damman           5412633
+## Wouter van der Hoorn     5370566
+
+
+
 ## This file houses the functions to calculate distances between airports based on their latitude and longitude and saves the distance dictionary as a pickle file
 import numpy as np
 import pandas as pd

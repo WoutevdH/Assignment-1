@@ -1,3 +1,8 @@
+## Group 2:
+## Ivo Aben                 5099471
+## Martijn Damman           5412633
+## Wouter van der Hoorn     5370566
+
 ## This file calculates the yield for each OD pair based on the distance
 from data_loader import *
 import pickle

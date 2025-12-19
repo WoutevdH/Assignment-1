@@ -1,3 +1,10 @@
+## Group 2:
+## Ivo Aben                 5099471
+## Martijn Damman           5412633
+## Wouter van der Hoorn     5370566
+
+## This file contains the Gurobi model for question 2 of the assignment, implementing the normal keypath model.
+
 from pathlib import Path
 from data_loader import *
 from gurobipy import Model, Var, GRB, quicksum

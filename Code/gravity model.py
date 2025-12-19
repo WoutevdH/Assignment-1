@@ -1,3 +1,8 @@
+## Group 2:
+## Ivo Aben                 5099471
+## Martijn Damman           5412633
+## Wouter van der Hoorn     5370566
+
 ##This file estimates the parameters for the gravity model based on 2021 data
 
 import numpy as np
